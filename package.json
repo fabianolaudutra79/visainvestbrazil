@@ -1,7 +1,7 @@
 {
   "name": "wisecrypto",
   "version": "1.0.0",
-  "description": "wisecrypto.digital",
+  "description": "visainvestbrazil",
   "main": "index.js",
   "scripts": {
     "sync": "browser-sync start --server --files \"**/*\"",
