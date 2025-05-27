@@ -668,12 +668,12 @@
 </footer>
 
 <script>
-    function changeLanguage(event, lang) {
-    // Apenas para garantir que o evento não cause navegação indesejada se for um link
+   function changeLanguage(event, lang) {
+    // Prevent the default link behavior if an event object is provided
     if (event && typeof event.preventDefault === 'function') {
         event.preventDefault();
     }
-    console.log(`Tentando mudar para o idioma: ${lang}`);
+    console.log(`Attempting to change language to: ${lang}`); // Log the intended language
 
     const desktopFlag = document.getElementById('desktop-flag');
     const desktopLangText = document.getElementById('desktop-lang-text');
@@ -697,10 +697,14 @@
         }
     };
 
-    // Get selected language or default to English
-    const selectedLangData =  languages['en'] || languages['es'] || languages['pt']; // Garante que temos os dados do idioma 'en', 'es', 'pt'
-    const selectedLangCode =  'en' || 'es' || 'pt'; // Garante que temos o código 'en', 'es', 'pt'
-    console.log(`Dados do idioma selectedLangCode:`, selectedLangCode);
+    // --- FIX STARTS HERE ---
+    // Get the language data based on the 'lang' parameter.
+    // If 'lang' is not a valid key, default to English.
+    const selectedLangData = languages[lang] || languages['en'];
+    const selectedLangCode = lang; // The 'lang' parameter itself is the code we need
+    // --- FIX ENDS HERE ---
+
+    console.log(`Language data selected:`, selectedLangData);
 
     // Update UI for flag and language code display
     if (desktopFlag) {
@@ -711,21 +715,24 @@
         desktopLangText.textContent = selectedLangData.code;
     }
 
-    // --- NOVO CÓDIGO PARA ATUALIZAR O CONTEÚDO BASEADO EM data-lang ---
+    // --- CODE TO UPDATE CONTENT BASED ON data-lang (YOUR NEW CODE) ---
     document.querySelectorAll('[data-lang]').forEach(element => {
         try {
             const translations = JSON.parse(element.dataset.lang);
+            // Ensure the selectedLangCode exists in the translations
             if (translations[selectedLangCode]) {
-                // Use innerHTML para permitir tags HTML como <b>
+                // Use innerHTML to allow HTML tags like <b>
                 element.innerHTML = translations[selectedLangCode];
+            } else if (translations['en']) { // Fallback to English if current lang not available
+                element.innerHTML = translations['en'];
             }
         } catch (e) {
-            console.error('Erro ao fazer parse do JSON em data-lang ou ao traduzir:', element, e);
+            console.error('Error parsing JSON from data-lang or translating:', element, e);
         }
     });
-    // --- FIM DO NOVO CÓDIGO ---
+    // --- END OF data-lang CODE ---
 
-    console.log(`Idioma alterado para: ${selectedLangData.name} (${selectedLangCode})`);
+    console.log(`Language successfully changed to: ${selectedLangData.name} (${selectedLangCode})`);
     localStorage.setItem('userLanguage', selectedLangCode);
 }
 
@@ -750,8 +757,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Trigger the language change (without event, passing a dummy event object)
+    // This will correctly initialize the flag and text based on initialLang
     changeLanguage({ preventDefault: () => {} }, initialLang);
 });
+
 // Text animation for hero section
         document.addEventListener('DOMContentLoaded', function() {
             const heroText = document.getElementById('hero-text');
