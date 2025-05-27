@@ -388,15 +388,15 @@
                         <i class="fas fa-chevron-down ml-1 text-xs"></i>
                     </button>
                     <div class="language-dropdown-content">
-                        <a href="#" onclick="changeLanguage('en')" class="flex items-center">
+                        <a href="#" onclick="changeLanguage( event, 'en')" class="flex items-center">
                             <img src="https://flagcdn.com/w20/us.png" alt="English" class="country-flag">
                             <span class="ml-2">English</span>
                         </a>
-                        <a href="#" onclick="changeLanguage('es')" class="flex items-center">
+                        <a href="#" onclick="changeLanguage(event, 'es')" class="flex items-center">
                             <img src="https://flagcdn.com/w20/es.png" alt="Español" class="country-flag">
                             <span class="ml-2">Español</span>
                         </a>
-                        <a href="#" onclick="changeLanguage('pt')" class="flex items-center">
+                        <a href="#" onclick="changeLanguage(event, 'pt')" class="flex items-center">
                             <img src="https://flagcdn.com/w20/br.png" alt="Português" class="country-flag">
                             <span class="ml-2">Português</span>
                         </a>
@@ -419,14 +419,14 @@
                 <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-soft-teal" data-lang='{"en": "Contact", "es": "Contacto", "pt": "Contato"}'>Contato</a>
                 
                 <div class="pt-4 pb-2 border-t border-gray-200">
-                    <span class="text-gray-600 mr-3" data-lang='{"en": "Language:", "es": "Idioma:", "pt": "Idioma:"}'>Idioma:</span>
-                    <a href="#" onclick="changeLanguage('en')" class="mr-2">
+                    <!-- <span class="text-gray-600 mr-3" data-lang='{"en": "Language:", "es": "Idioma:", "pt": "Idioma:"}'>Idioma:</span> -->
+                    <a href="#" onclick="changeLanguage(event , 'en')" class="mr-2">
                         <img src="https://flagcdn.com/w20/us.png" alt="English" class="country-flag">
                     </a>
-                    <a href="#" onclick="changeLanguage('es')" class="mr-2">
+                    <a href="#" onclick="changeLanguage( event, 'es')" class="mr-2">
                         <img src="https://flagcdn.com/w20/es.png" alt="Español" class="country-flag">
                     </a>
-                    <a href="#" onclick="changeLanguage('pt')">
+                    <a href="#" onclick="changeLanguage(event, 'pt')">
                         <img src="https://flagcdn.com/w20/br.png" alt="Português" class="country-flag">
                     </a>
                 </div>
@@ -668,90 +668,94 @@
 </footer>
 
 <script>
-    function changeLanguage(event, lang) {
-    // Apenas para garantir que o evento não cause navegação indesejada se for um link
-    if (event && typeof event.preventDefault === 'function') {
-        event.preventDefault();
-    }
-    console.log(`Tentando mudar para o idioma: ${lang}`);
+//     function changeLanguage(event, lang) {
+//     // Apenas para garantir que o evento não cause navegação indesejada se for um link
+//     if (event && typeof event.preventDefault === 'function') {
+//         event.preventDefault();
+//     }
+//     console.log(`Tentando mudar para o idioma: ${lang}`);
 
-    const desktopFlag = document.getElementById('desktop-flag');
-    const desktopLangText = document.getElementById('desktop-lang-text');
+//     console.log(`Tentando mudar para o event: ${event.preventDefault()}`);
 
-    // Language configuration object
-    const languages = {
-        'en': {
-            flag: 'https://flagcdn.com/w20/us.png',
-            code: 'EN',
-            name: 'English'
-        },
-        'es': {
-            flag: 'https://flagcdn.com/w20/es.png',
-            code: 'ES',
-            name: 'Español'
-        },
-        'pt': {
-            flag: 'https://flagcdn.com/w20/br.png',
-            code: 'PT',
-            name: 'Português'
-        }
-    };
+//     const desktopFlag = document.getElementById('desktop-flag');
+//     const desktopLangText = document.getElementById('desktop-lang-text');
 
-    // Get selected language or default to English
-    const selectedLangData =  languages['en'] || languages['es'] || languages['pt']; // Garante que temos os dados do idioma 'en', 'es', 'pt'
-    const selectedLangCode =  'en' || 'es' || 'pt'; // Garante que temos o código 'en', 'es', 'pt'
-    console.log(`Dados do idioma selectedLangCode:`, selectedLangCode);
+//     // Language configuration object
+//     const languages = {
+//         'en': {
+//             flag: 'https://flagcdn.com/w20/us.png',
+//             code: 'EN',
+//             name: 'English'
+//         },
+//         'es': {
+//             flag: 'https://flagcdn.com/w20/es.png',
+//             code: 'ES',
+//             name: 'Español'
+//         },
+//         'pt': {
+//             flag: 'https://flagcdn.com/w20/br.png',
+//             code: 'PT',
+//             name: 'Português'
+//         }
+//     };
 
-    // Update UI for flag and language code display
-    if (desktopFlag) {
-        desktopFlag.src = selectedLangData.flag;
-        desktopFlag.alt = selectedLangData.name;
-    }
-    if (desktopLangText) {
-        desktopLangText.textContent = selectedLangData.code;
-    }
+//     // Get selected language or default to English
+//     const selectedLangData =  languages['en'] || languages['es'] || languages['pt']; // Garante que temos os dados do idioma 'en', 'es', 'pt'
+//     const selectedLangCode =  'en' || 'es' || 'pt'; // Garante que temos o código 'en', 'es', 'pt'
+//     console.log(`Dados do idioma selectedLangCode:`, selectedLangCode);
 
-    // --- NOVO CÓDIGO PARA ATUALIZAR O CONTEÚDO BASEADO EM data-lang ---
-    document.querySelectorAll('[data-lang]').forEach(element => {
-        try {
-            const translations = JSON.parse(element.dataset.lang);
-            if (translations[selectedLangCode]) {
-                // Use innerHTML para permitir tags HTML como <b>
-                element.innerHTML = translations[selectedLangCode];
-            }
-        } catch (e) {
-            console.error('Erro ao fazer parse do JSON em data-lang ou ao traduzir:', element, e);
-        }
-    });
-    // --- FIM DO NOVO CÓDIGO ---
+//     // Update UI for flag and language code display
+//     if (desktopFlag) {
+//         desktopFlag.src = selectedLangData.flag;
+//         desktopFlag.alt = selectedLangData.name;
+//     }
+//     if (desktopLangText) {
+//         desktopLangText.textContent = selectedLangData.code;
+//     }
 
-    console.log(`Idioma alterado para: ${selectedLangData.name} (${selectedLangCode})`);
-    localStorage.setItem('userLanguage', selectedLangCode);
-}
+//     // --- NOVO CÓDIGO PARA ATUALIZAR O CONTEÚDO BASEADO EM data-lang ---
+//     document.querySelectorAll('[data-lang]').forEach(element => {
+//         try {
+//             const translations = JSON.parse(element.dataset.lang);
+//             if (translations[selectedLangCode]) {
+//                 // Use innerHTML para permitir tags HTML como <b>
+//                 element.innerHTML = translations[selectedLangCode];
+//             }
+//         } catch (e) {
+//             console.error('Erro ao fazer parse do JSON em data-lang ou ao traduzir:', element, e);
+//         }
+//     });
+//     // --- FIM DO NOVO CÓDIGO ---
 
-// Set initial language on page load
-document.addEventListener('DOMContentLoaded', () => {
-    const supportedLanguages = ['en', 'es', 'pt'];
-    const storedLanguage = localStorage.getItem('userLanguage');
+//     console.log(`Idioma alterado para: ${selectedLangData.name} (${selectedLangCode})`);
+//     localStorage.setItem('userLanguage', selectedLangCode);
+// }
 
-    // Determine initial language (default to English)
-    let initialLang = 'en';
+// // Set initial language on page load
+// document.addEventListener('DOMContentLoaded', () => {
+//     const supportedLanguages = ['en', 'es', 'pt'];
+//     const storedLanguage = localStorage.getItem('userLanguage');
 
-    // Check stored language first
-    if (storedLanguage && supportedLanguages.includes(storedLanguage)) {
-        initialLang = storedLanguage;
-    }
-    // Then check browser language
-    else {
-        const browserLang = navigator.language.split('-')[0];
-        if (supportedLanguages.includes(browserLang)) {
-            initialLang = browserLang;
-        }
-    }
+//     // Determine initial language (default to English)
+//     let initialLang = 'en';
 
-    // Trigger the language change (without event, passing a dummy event object)
-    changeLanguage({ preventDefault: () => {} }, initialLang);
-});
+//     // Check stored language first
+//     if (storedLanguage && supportedLanguages.includes(storedLanguage)) {
+//         initialLang = storedLanguage;
+//     }
+//     // Then check browser language
+//     else {
+//         const browserLang = navigator.language.split('-')[0];
+//         if (supportedLanguages.includes(browserLang)) {
+//             initialLang = browserLang;
+//         }
+//     }
+
+//     // Trigger the language change (without event, passing a dummy event object)
+//     changeLanguage({ preventDefault: () => {} }, initialLang);
+// });
+
+
 // Text animation for hero section
         document.addEventListener('DOMContentLoaded', function() {
             const heroText = document.getElementById('hero-text');
@@ -795,68 +799,99 @@ document.addEventListener('DOMContentLoaded', () => {
             // Change slide every 5 seconds
             setInterval(nextSlide, 5000);
         });
-//  function changeLanguage(event, lang) {
-//     //event.preventDefault();
-//     //console.log(`event.preventDefault(): ${event.preventDefault()}`);
-//     console.log(`event: ${event}`);
+ function changeLanguage(event, lang) {
+    //event.preventDefault();
+    //console.log(`event.preventDefault(): ${event.preventDefault()}`);
+     if (event && typeof event.preventDefault === 'function') {
+         event.preventDefault();
+   }
+    console.log(`event: ${event}`);
     
-//     const desktopFlag = document.getElementById('desktop-flag');
-//     const desktopLangText = document.getElementById('desktop-lang-text');
+    const desktopFlag = document.getElementById('desktop-flag');
+    const desktopLangText = document.getElementById('desktop-lang-text');
 
-//     // Language configuration object
-//     const languages = {
-//         'en': {
-//             flag: 'https://flagcdn.com/w20/us.png',
-//             code: 'EN',
-//             name: 'English'
-//         },
-//         'es': {
-//             flag: 'https://flagcdn.com/w20/es.png',
-//             code: 'ES',
-//             name: 'Español'
-//         },
-//         'pt': {
-//             flag: 'https://flagcdn.com/w20/br.png',
-//             code: 'PT',
-//             name: 'Português'
-//         }
-//     };
+    // Language configuration object
+    const languages = {
+        'en': {
+            flag: 'https://flagcdn.com/w20/us.png',
+            code: 'EN',
+            name: 'English'
+        },
+        'es': {
+            flag: 'https://flagcdn.com/w20/es.png',
+            code: 'ES',
+            name: 'Español'
+        },
+        'pt': {
+            flag: 'https://flagcdn.com/w20/br.png',
+            code: 'PT',
+            name: 'Português'
+        }
+    };
 
-//     // Get selected language or default to English
-//     const selectedLang = languages[lang] || languages['en'];
+    // Get selected language or default to English
+    const selectedLang = languages[lang] || languages['en'];
+    //Get selected language or default to English
+    const selectedLangData =  languages['en'] || languages['es'] || languages['pt']; // Garante que temos os dados do idioma 'en', 'es', 'pt'
+    const selectedLangCode =  'en' || 'es' || 'pt'; // Garante que temos o código 'en', 'es', 'pt'
+    console.log(`Dados do idioma selectedLangCode:`, selectedLangCode);
+     console.log(`Dados do idioma selectedLang:`, selectedLang);
 
-//     // Update UI
-//     desktopFlag.src = selectedLang.flag;
-//     desktopFlag.alt = selectedLang.name;
-//     desktopLangText.textContent = selectedLang.code;
+    // Update UI
+    // desktopFlag.src = selectedLangData.flag;
+    // desktopFlag.alt = selectedLangData.name;
+    // desktopLangText.textContent = selectedLangData.code;
+    //     // Update UI for flag and language code display
+    if (desktopFlag) {
+        desktopFlag.src = selectedLang.flag;
+        desktopFlag.alt = selectedLang.name;
+    }
+    if (desktopLangText) {
+        desktopLangText.textContent = selectedLang.code;
+    }
 
-//     console.log(`Language changed to: ${selectedLang.name} (${lang})`);
-//     localStorage.setItem('userLanguage', lang);
-// }
+//     // --- NOVO CÓDIGO PARA ATUALIZAR O CONTEÚDO BASEADO EM data-lang ---
+    document.querySelectorAll('[data-lang]').forEach(element => {
+        try {
+            const translations = JSON.parse(element.dataset.lang);
+            //adiocnar o lang Fabiano
+            if (translations[lang]) {
+                // Use innerHTML para permitir tags HTML como <b>
+                element.innerHTML = translations[lang];
+            }
+        } catch (e) {
+            console.error('Erro ao fazer parse do JSON em data-lang ou ao traduzir:', element, e);
+        }
+    });
+//     // --- FIM DO NOVO CÓDIGO ---
 
-// // Set initial language on page load
-// document.addEventListener('DOMContentLoaded', () => {
-//     const supportedLanguages = ['en', 'es', 'pt'];
-//     const storedLanguage = localStorage.getItem('userLanguage');
+    console.log(`Language changed to: ${selectedLang.name} (${selectedLang.code}) (${lang})`);
+    localStorage.setItem('userLanguage', lang);
+}
+
+// Set initial language on page load
+document.addEventListener('DOMContentLoaded', () => {
+    const supportedLanguages = ['en', 'es', 'pt'];
+    const storedLanguage = localStorage.getItem('userLanguage');
     
-//     // Determine initial language (default to English)
-//     let initialLang = 'en';
+    // Determine initial language (default to English)
+    let initialLang = 'en';
     
-//     // Check stored language first
-//     if (storedLanguage && supportedLanguages.includes(storedLanguage)) {
-//         initialLang = storedLanguage;
-//     } 
-//     // Then check browser language
-//     else {
-//         const browserLang = navigator.language.split('-')[0];
-//         if (supportedLanguages.includes(browserLang)) {
-//             initialLang = browserLang;
-//         }
-//     }
+    // Check stored language first
+    if (storedLanguage && supportedLanguages.includes(storedLanguage)) {
+        initialLang = storedLanguage;
+    } 
+    // Then check browser language
+    else {
+        const browserLang = navigator.language.split('-')[0];
+        if (supportedLanguages.includes(browserLang)) {
+            initialLang = browserLang;
+        }
+    }
 
-//     // Trigger the language change (without event)
-//     changeLanguage({ preventDefault: () => {} }, initialLang);
-// });
+    // Trigger the language change (without event)
+    changeLanguage({ preventDefault: () => {} }, initialLang);
+});
 
 // Modal functionality (assuming you already have this)
 function openAboutModal() {
