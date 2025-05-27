@@ -6,8 +6,127 @@
     <title>VisaInvest Brazil</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>        
+       // Modal "Quem Somos" melhorado
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById("aboutModal");
+            const span = document.querySelector(".close-modal");
+            
+            if (modal && span) {
+            function openAboutModal() {
+                modal.style.display = "block";
+                document.body.style.overflow = "hidden"; // Bloqueia scroll da página
+            }
+            
+            function closeModal() {
+                modal.style.display = "none";
+                document.body.style.overflow = "auto"; // Libera scroll da página
+            }
+            
+            span.onclick = closeModal;
+            
+            window.onclick = function(event) {
+                if (event.target === modal) {
+                closeModal();
+                }
+            }
+            
+            // Adiciona efeito de teclado (ESC para fechar)
+            document.onkeydown = function(evt) {
+                evt = evt || window.event;
+                if (evt.key === "Escape") {
+                closeModal();
+                }
+            };
+            
+            window.openAboutModal = openAboutModal;
+            }
+        });
+
+
+        document.querySelectorAll('.modern-float-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const wave = this.querySelector('.wave');
+                wave.style.animation = 'none';
+                void wave.offsetWidth; // Trigger reflow
+                wave.style.animation = 'wave 1s linear';
+            });
+        });
+
+        
+
+        // Toggle mobile menu
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+      
+        
+        // Text animation for hero section
+        document.addEventListener('DOMContentLoaded', function() {
+            const heroText = document.getElementById('hero-text');
+            heroText.style.opacity = '0';
+            heroText.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                heroText.style.transition = 'opacity 1s ease, transform 1s ease';
+                heroText.style.opacity = '1';
+                heroText.style.transform = 'translateY(0)';
+            }, 300);
+        });
+
+        // Text animation for hero describe section more
+        document.addEventListener('DOMContentLoaded', function() {
+            const heroText = document.getElementById('hero-describe');
+            heroText.style.opacity = '0';
+            heroText.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                heroText.style.transition = 'opacity 1s ease, transform 1s ease';
+                heroText.style.opacity = '1';
+                heroText.style.transform = 'translateY(0)';
+            }, 300);
+        });
+
+          document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.hero-carousel .relative > div');
+            let currentSlide = 0;
+            
+            function nextSlide() {
+                slides[currentSlide].classList.remove('opacity-100');
+                slides[currentSlide].classList.add('opacity-0');
+                
+                currentSlide = (currentSlide + 1) % slides.length;
+                
+                slides[currentSlide].classList.remove('opacity-0');
+                slides[currentSlide].classList.add('opacity-100');
+            }
+            
+            // Change slide every 5 seconds
+            setInterval(nextSlide, 5000);
+        });
+
+       const dropdown = document.getElementById('language-dropdown');
+    const button = document.getElementById('language-button');
+    const menu = document.getElementById('language-menu');
+    
+    // Toggle menu on click
+    button.addEventListener('click', () => {
+        menu.classList.toggle('hidden');
+    });
+    
+    // Close when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!dropdown.contains(e.target)) {
+            menu.classList.add('hidden');
+        }
+    });
+
+    </script>
     <style>
-        /* Estilos melhorados para o modal */
+        
+          /* Estilos melhorados para o modal */
         .modal {
             display: none;
             position: fixed;
@@ -36,12 +155,12 @@
         
         @keyframes modalFadeIn {
             from {
-                opacity: 0;
-                transform: translateY(-50px) scale(0.9);
+            opacity: 0;
+            transform: translateY(-50px) scale(0.9);
             }
             to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
+            opacity: 1;
+            transform: translateY(0) scale(1);
             }
         }
         
@@ -83,12 +202,12 @@
         
         @keyframes textFadeIn {
             from {
-                opacity: 0;
-                transform: translateY(20px);
+            opacity: 0;
+            transform: translateY(20px);
             }
             to {
-                opacity: 1;
-                transform: translateY(0);
+            opacity: 1;
+            transform: translateY(0);
             }
         }
         
@@ -105,17 +224,17 @@
         
         @media (max-width: 768px) {
             .modal-content {
-                width: 90%;
-                padding: 30px 20px;
-                margin: 10% auto;
+            width: 90%;
+            padding: 30px 20px;
+            margin: 10% auto;
             }
             
             .modal-content h3 {
-                font-size: 1.8rem;
+            font-size: 1.8rem;
             }
             
             .modal-content p {
-                font-size: 1.1rem;
+            font-size: 1.1rem;
             }
         }
         .hero-gradient {
@@ -130,14 +249,14 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
         }
-        .country-flag {
+        /* .country-flag {
             height: 24px;
             width: 36px;
             object-fit: cover;
             border-radius: 2px;
             margin-right: 10px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
+        } */
         .bg-soft-teal {
             background-color: #4fd1c5;
         }
@@ -319,7 +438,7 @@
             }
         }
         .hero-carousel {
-            height: 70vh;
+        height: 70vh;
         }
         
         .hero-gradient {
@@ -332,38 +451,10 @@
                 min-height: 70vh;
             }
         }
-        
-        /* Language dropdown styles */
-        .language-dropdown {
-            position: relative;
-            display: inline-block;
-        }
-        
-        .language-dropdown-content {
-            display: none;
-            position: absolute;
-            right: 0;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-            border-radius: 0.375rem;
-        }
-        
-        .language-dropdown:hover .language-dropdown-content {
-            display: block;
-        }
-        
-        .language-dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            transition: background-color 0.3s;
-        }
-        
-        .language-dropdown-content a:hover {
-            background-color: #f1f1f1;
+        /* Basic styling for country flags */
+        .country-flag {
+            border-radius: 2px; /* Slightly rounded corners for flags */
+            box-shadow: 0 0 2px rgba(0,0,0,0.1); /* Subtle shadow for flags */
         }
     </style>
 </head>
@@ -376,32 +467,35 @@
             </div>
             
             <div class="hidden md:flex items-center space-x-4" id="desktop-menu">
-                <a href="javascript:void(0)" onclick="openAboutModal()" class="text-gray-600 hover:text-soft-teal px-3 py-2 rounded-md text-lg transition-colors duration-300" data-lang='{"en": "Who We Are", "es": "Quiénes Somos", "pt": "Quem Somos"}'>Quem Somos</a>
+                 <a href="javascript:void(0)" onclick="openAboutModal()" class="text-gray-600 hover:text-soft-teal px-3 py-2 rounded-md text-lg transition-colors duration-300" data-lang='{"en": "Who We Are", "es": "Quiénes Somos", "pt": "Quem Somos"}'>Quem Somos</a>
                 <a href="#services" class="text-gray-600 hover:text-soft-teal px-3 py-2 rounded-md text-lg transition-colors duration-300" data-lang='{"en": "Services", "es": "Servicios", "pt": "Serviços"}'>Serviços</a>
                 <a href="#team" class="text-gray-600 hover:text-soft-teal px-3 py-2 rounded-md text-lg transition-colors duration-300" data-lang='{"en": "Team", "es": "Equipo", "pt": "Equipe"}'>Equipe</a>
                 <a href="#contact" class="text-gray-600 hover:text-soft-teal px-3 py-2 rounded-md text-lg transition-colors duration-300" data-lang='{"en": "Contact", "es": "Contacto", "pt": "Contato"}'>Contato</a>
                 
-                <div class="language-dropdown ml-4">
-                    <button class="flex items-center text-gray-600 hover:text-soft-teal">
-                        <img id="desktop-flag" src="https://flagcdn.com/w20/br.png" alt="Português" class="country-flag">
-                        <span id="desktop-lang-text" class="ml-1">PT</span>
-                        <i class="fas fa-chevron-down ml-1 text-xs"></i>
-                    </button>
-                    <div class="language-dropdown-content">
-                        <a href="#" onclick="changeLanguage('en')" class="flex items-center">
-                            <img src="https://flagcdn.com/w20/us.png" alt="English" class="country-flag">
-                            <span class="ml-2">English</span>
-                        </a>
-                        <a href="#" onclick="changeLanguage('es')" class="flex items-center">
-                            <img src="https://flagcdn.com/w20/es.png" alt="Español" class="country-flag">
-                            <span class="ml-2">Español</span>
-                        </a>
-                        <a href="#" onclick="changeLanguage('pt')" class="flex items-center">
-                            <img src="https://flagcdn.com/w20/br.png" alt="Português" class="country-flag">
-                            <span class="ml-2">Português</span>
-                        </a>
-                    </div>
+               <div class="relative group inline-block ml-4">
+                <button class="flex items-center text-gray-600 hover:text-blue-500 rounded-lg p-2 transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <img id="desktop-flag" src="https://flagcdn.com/w20/us.png" alt="English" class="country-flag">
+                    <span id="desktop-lang-text" class="ml-2 font-semibold text-sm">EN</span>
+                    <i class="fas fa-chevron-down ml-2 text-xs"></i>
+                </button>
+
+                <div class="absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-xl py-1 z-50
+                            opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto
+                            transition-opacity duration-200 ease-in-out origin-top-right">
+                    <a href="#" onclick="changeLanguage(event, 'en')" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 flex items-center">
+                        <img src="https://flagcdn.com/w20/us.png" alt="English" class="country-flag">
+                        <span class="ml-2">English</span>
+                    </a>
+                    <a href="#" onclick="changeLanguage(event, 'es')" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 flex items-center">
+                        <img src="https://flagcdn.com/w20/es.png" alt="Español" class="country-flag">
+                        <span class="ml-2">Español</span>
+                    </a>
+                    <a href="#" onclick="changeLanguage(event, 'pt')" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 flex items-center">
+                        <img src="https://flagcdn.com/w20/br.png" alt="Português" class="country-flag">
+                        <span class="ml-2">Português</span>
+                    </a>
                 </div>
+    </div>
             </div>
             
             <button id="mobile-menu-button" class="md:hidden text-gray-600 hover:text-soft-teal focus:outline-none" onclick="toggleMenu()">
@@ -411,6 +505,9 @@
             </button>
         </nav>
         
+
+
+        
         <div id="mobile-menu" class="hidden md:hidden">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 <a href="#services" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-soft-teal" data-lang='{"en": "Services", "es": "Servicios", "pt": "Serviços"}'>Serviços</a>
@@ -418,18 +515,30 @@
                 <a href="javascript:void(0)" onclick="openAboutModal()" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-soft-teal" data-lang='{"en": "Who We Are", "es": "Quiénes Somos", "pt": "Quem Somos"}'>Quem Somos</a>
                 <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-soft-teal" data-lang='{"en": "Contact", "es": "Contacto", "pt": "Contato"}'>Contato</a>
                 
-                <div class="pt-4 pb-2 border-t border-gray-200">
-                    <span class="text-gray-600 mr-3" data-lang='{"en": "Language:", "es": "Idioma:", "pt": "Idioma:"}'>Idioma:</span>
-                    <a href="#" onclick="changeLanguage('en')" class="mr-2">
-                        <img src="https://flagcdn.com/w20/us.png" alt="English" class="country-flag">
-                    </a>
-                    <a href="#" onclick="changeLanguage('es')" class="mr-2">
-                        <img src="https://flagcdn.com/w20/es.png" alt="Español" class="country-flag">
-                    </a>
-                    <a href="#" onclick="changeLanguage('pt')">
-                        <img src="https://flagcdn.com/w20/br.png" alt="Português" class="country-flag">
-                    </a>
-                </div>
+            <div class="relative group inline-block ml-4">
+        <button class="flex items-center text-gray-600 hover:text-blue-500 rounded-lg p-2 transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <img id="desktop-flag" src="https://flagcdn.com/w20/us.png" alt="English" class="country-flag">
+            <span id="desktop-lang-text" class="ml-2 font-semibold text-sm">EN</span>
+            <i class="fas fa-chevron-down ml-2 text-xs"></i>
+        </button>
+
+        <div class="absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-xl py-1 z-50
+                    opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto
+                    transition-opacity duration-200 ease-in-out origin-top-right">
+            <a href="#" onclick="changeLanguage(event, 'en')" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 flex items-center">
+                <img src="https://flagcdn.com/w20/us.png" alt="English" class="country-flag">
+                <span class="ml-2">English</span>
+            </a>
+            <a href="#" onclick="changeLanguage(event, 'es')" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 flex items-center">
+                <img src="https://flagcdn.com/w20/es.png" alt="Español" class="country-flag">
+                <span class="ml-2">Español</span>
+            </a>
+            <a href="#" onclick="changeLanguage(event, 'pt')" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 flex items-center">
+                <img src="https://flagcdn.com/w20/br.png" alt="Português" class="country-flag">
+                <span class="ml-2">Português</span>
+            </a>
+        </div>
+    </div>
             </div>
         </div>
     </header>
@@ -447,15 +556,15 @@
             <div class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out opacity-0" style="background-image: url('images/praia.jpg')"></div>
         </div>
     
-        <div class="hero-gradient absolute inset-0 py-32 px-4">
+    <div class="hero-gradient absolute inset-0 py-32 px-4">
             <div class="max-w-7xl mx-auto">
                 <div class="md:w-1/2 text-white">
                     <h1 id="hero-text" class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 animate-text" data-lang='{"en": "DISCOVER BRAZIL AS YOUR NEW HOME", "es": "DESCUBRA BRASIL COMO SU NUEVO HOGAR", "pt": "DESCUBRA O BRASIL COMO SEU NOVO LAR"}'>
                         DESCUBRA O BRASIL COMO SEU NOVO LAR
                     </h1>
                     <p id="hero-describe" class="text-xl mb-8" data-lang='{"en": "Welcome to VisaInvest Brazil, your consultancy for visas, residency, and legalization for foreigners in Brazil. We are a specialized consultancy in the immigration of foreigners who wish to reside in Brazil, whether through Real Estate Investments, as Digital Nomads, or Retirees. We offer complete end-to-end and personalized assistance for you and your family to establish yourselves in Brazil. This is the destination for those looking to invest intelligently, live elegantly, and enjoy the natural riches of this country.", "es": "Bienvenido a VisaInvest Brazil, su asesoría en visas, residencia y legalización para extranjeros en Brasil. Somos una consultoría especializada en la inmigración de extranjeros que desean residir en Brasil, ya sea a través de Inversiones Inmobiliarias, como Nómadas Digitales o Jubilados. Ofrecemos asesoría completa de principio a fin y personalizada para que usted y su familia se establezcan en Brasil. Este es el destino para quienes buscan invertir con inteligencia, vivir con elegancia y disfrutar de las riquezas naturales de este país.", "pt": "Seja bem-vindo à VisaInvest Brazil, sua assessoria em vistos, residência e legalização para estrangeiros no Brasil. Somos uma consultoria especializada em imigração de estrangeiros que desejam residir no Brasil, seja por meio de Investimentos Imobiliários, como Nômades Digitais ou Aposentados. Oferecemos assessoria completa de ponta a ponta e personalizada para você e sua família se estabelecerem no Brasil. Este é o destino para quem busca investir com inteligência, viver com elegância e aproveitar as riquezas naturais deste país."}'>
-                        Seja bem-vindo à VisaInvest Brazil, sua assessoria em vistos, residência e legalização para estrangeiros no Brasil.
-                        <br>
+                    Seja bem-vindo à VisaInvest Brazil, sua assessoria em vistos, residência e legalização para estrangeiros no Brasil.
+                    <br>
                         Somos uma consultoria especializada em imigração de estrangeiros que desejam residir no Brasil, 
                         seja por meio de Investimentos Imobiliários, como nômade Digitais ou Aposentados.
                         <br>
@@ -538,14 +647,13 @@
                             <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </div>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-3" data-lang='{"en": "Permanent Residency for Investors", "es": "Residencia Permanente para Inversores", "pt": "Residência Permanente para Investidores"}'>Residência Permanente para Investidores</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed" data-lang='{"en": "is a permanent visa granted to foreigners who invest a significant amount in the Brazilian economy, such as through the purchase of real estate or the establishment of a business. This visa allows the investor and their family to live and work in Brazil indefinitely, provided they meet the investment requirements.", "es": "es una visa permanente otorgada a extranjeros que invierten una cantidad significativa en la economía brasileña, como a través de la compra de bienes raíces o el establecimiento de un negocio. Esta visa permite al inversionista y su familia vivir y trabajar en Brasil indefinidamente, siempre que cumplan con los requisitos de inversión.", "pt": "é um visto permanente concedido a estrangeiros que investem uma quantia significativa na economia brasileira, como por meio da compra de imóveis ou do estabelecimento de um negócio. Esse visto permite que o investidor e sua família morem e trabalhem no Brasil indefinidamente, desde que atendam aos requisitos de investimento."}'>é um visto permanente concedido a estrangeiros que investem uma quantia significativa na economia brasileira, 
-                        como por meio da compra de imóveis ou do estabelecimento de um negócio. Esse visto permite que o investidor e sua família morem e trabalhem no Brasil indefinidamente, 
-                        desde que atendam aos requisitos de investimento.</p>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3" data-lang='{"en": "Transcription of certificates in Brazil", "es": "Transcipción de certificados en Brasil", "pt": "Transcrição de certidões no Brasil"}'>Transcrição de certidões no Brasil</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed" data-lang='{"en": "Transcription of certificates in Brazil", "es": "Transcipción de certificados en Brasil", "pt": "Transcrição de certidões no Brasil"}'>Transcrição de certidões no Brasil</p>
                 </div>
             </div>
         </div>
-    </section>  
+    </section>
+
     <section id="team" class="py-20 bg-white">
         <div class="container mx-auto px-6">
             <h2 class="text-4xl font-bold text-center text-gray-700 mb-16" data-lang='{"en": "Meet Our Team of Specialists", "es": "Conozca a Nuestro Equipo de Especialistas", "pt": "Conheça Nossa Equipe de Especialistas"}'>Conheça Nossa Equipe de Especialistas</h2>
@@ -668,9 +776,7 @@
 
 <script>
  function changeLanguage(event, lang) {
-    //event.preventDefault();
-    //console.log(`event.preventDefault(): ${event.preventDefault()}`);
-    console.log(`event: ${event}`);
+    event.preventDefault();
     
     const desktopFlag = document.getElementById('desktop-flag');
     const desktopLangText = document.getElementById('desktop-lang-text');
