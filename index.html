@@ -480,7 +480,8 @@
                         </svg>
                     </div>
                     <h3 class="text-xl font-semibold text-gray-800 mb-3" data-lang='{"en": "Residency Authorization based on Real Estate Investment in Brazil", "es": "Autorización de Residencia basada en Inversión Inmobiliaria en Brasil", "pt": "Autorização de Residência com base em Investimento Imobiliário no Brasil"}'>Autorização de Residência com base em Investimento Imobiliário no Brasil</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed" data-lang='{"en": "is a temporary or permanent visa granted by the Brazilian government to foreigners who make significant investments in the country's real estate market. This modality aims to attract foreign capital and boost economic development, offering the investor and their family the right to legally reside in Brazil.", "es": "es una visa temporal o permanente otorgada por el gobierno brasileño a extranjeros que realizan inversiones significativas en el mercado inmobiliario del país. Esta modalidad tiene como objetivo atraer capital extranjero e impulsar el desarrollo económico, ofreciendo al inversionista y su familia el derecho a residir legalmente en Brasil.", "pt": "é um visto temporário ou permanente concedido pelo governo brasileiro a estrangeiros que realizam investimentos significativos no mercado imobiliário do país. Essa modalidade visa atrair capital estrangeiro e impulsionar o desenvolvimento econômico, oferecendo ao investidor e sua família o direito de residir legalmente no Brasil."}'>é um visto temporário ou permanente concedido pelo governo brasileiro 
+                    <p class="text-gray-600 text-sm leading-relaxed" data-lang='{"en": "is a temporary or permanent visa granted by the Brazilian government to foreigners who make significant investments in the countrys real estate market. This modality aims to attract foreign capital and boost economic development, offering the investor and their family the right to legally reside in Brazil.", "es": "es una visa temporal o permanente otorgada por el gobierno brasileño a extranjeros que realizan inversiones significativas en el mercado inmobiliario del país. Esta modalidad tiene como objetivo atraer capital extranjero e impulsar el desarrollo económico, ofreciendo al inversionista y su familia el derecho a residir legalmente en Brasil.", 
+                    "pt": "é um visto temporário ou permanente concedido pelo governo brasileiro a estrangeiros que realizam investimentos significativos no mercado imobiliário do país. Essa modalidade visa atrair capital estrangeiro e impulsionar o desenvolvimento econômico, oferecendo ao investidor e sua família o direito de residir legalmente no Brasil."}'>é um visto temporário ou permanente concedido pelo governo brasileiro 
                         a estrangeiros que realizam investimentos significativos no mercado imobiliário do país. Essa modalidade visa atrair capital estrangeiro 
                         e impulsionar o desenvolvimento econômico, oferecendo ao investidor e sua família o direito de residir legalmente no Brasil.</p>
                 </div>
@@ -697,8 +698,9 @@
     };
 
     // Get selected language or default to English
-    const selectedLangData = languages[lang] || languages['en'];
-    const selectedLangCode = lang || 'en'; // Garante que temos o código 'en', 'es', 'pt'
+    const selectedLangData =  languages['en'] || languages['es'] || languages['pt']; // Garante que temos os dados do idioma 'en', 'es', 'pt'
+    const selectedLangCode =  'en' || 'es' || 'pt'; // Garante que temos o código 'en', 'es', 'pt'
+    console.log(`Dados do idioma selectedLangCode:`, selectedLangCode);
 
     // Update UI for flag and language code display
     if (desktopFlag) {
