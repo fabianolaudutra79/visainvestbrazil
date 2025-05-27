@@ -776,100 +776,65 @@
 
 <script>
  function changeLanguage(event, lang) {
-            event.preventDefault(); // Prevent the default link behavior (e.g., navigating to '#')
+    event.preventDefault();
+    
+    const desktopFlag = document.getElementById('desktop-flag');
+    const desktopLangText = document.getElementById('desktop-lang-text');
 
-            const desktopFlag = document.getElementById('desktop-flag');
-            const desktopLangText = document.getElementById('desktop-lang-text');
-
-            let flagSrc = '';
-            let langText = '';
-            let langFull = '';
-
-            // Determine the correct flag source, short text, and full language name
-            switch (lang) {
-                case 'en':
-                    flagSrc = 'https://flagcdn.com/w20/us.png';
-                    langText = 'EN';
-                    langFull = 'English';
-                    break;
-                case 'es':
-                    flagSrc = 'https://flagcdn.com/w20/es.png';
-                    langText = 'ES';
-                    langFull = 'Español';
-                    break;
-                case 'pt':
-                    flagSrc = 'https://flagcdn.com/w20/br.png';
-                    langText = 'PT';
-                    langFull = 'Português';
-                    break;
-                default:
-                    // Fallback to English if an unknown language code is provided
-                    flagSrc = 'https://flagcdn.com/w20/us.png';
-                    langText = 'EN';
-                    langFull = 'English';
-            }
-
-            // Update the flag image and language text on the main button
-            desktopFlag.src = flagSrc;
-            desktopFlag.alt = langFull;
-            desktopLangText.textContent = langText;
-
-            console.log(`Language changed to: ${langFull} (${lang})`);
-            // Store the selected language in localStorage for future visits
-            localStorage.setItem('userLanguage', lang);
-
-            // In a real application, you would typically update the content
-            // on the page based on the selected language here.
-            // Example:
-            // updatePageContent(lang);
+    // Language configuration object
+    const languages = {
+        'en': {
+            flag: 'https://flagcdn.com/w20/us.png',
+            code: 'EN',
+            name: 'English'
+        },
+        'es': {
+            flag: 'https://flagcdn.com/w20/es.png',
+            code: 'ES',
+            name: 'Español'
+        },
+        'pt': {
+            flag: 'https://flagcdn.com/w20/br.png',
+            code: 'PT',
+            name: 'Português'
         }
+    };
 
-        // Set the initial language and flag when the page loads
-        document.addEventListener('DOMContentLoaded', () => {
-            const storedLanguage = localStorage.getItem('userLanguage');
-            const desktopFlag = document.getElementById('desktop-flag');
-            const desktopLangText = document.getElementById('desktop-lang-text');
+    // Get selected language or default to English
+    const selectedLang = languages[lang] || languages['en'];
 
-            let initialLang = 'en'; // Default language if no preference is stored
+    // Update UI
+    desktopFlag.src = selectedLang.flag;
+    desktopFlag.alt = selectedLang.name;
+    desktopLangText.textContent = selectedLang.code;
 
-            // Check if a language preference is stored in localStorage
-            if (storedLanguage && ['pt', 'en', 'es'].includes(storedLanguage)) {
-                initialLang = storedLanguage;
-            } else {
-                // If not, try to determine from the browser's language setting
-                const browserLang = navigator.language.split('-')[0];
-                if (['pt', 'en', 'es'].includes(browserLang)) {
-                    initialLang = browserLang;
-                }
-            }
+    console.log(`Language changed to: ${selectedLang.name} (${lang})`);
+    localStorage.setItem('userLanguage', lang);
+}
 
-            // Manually set the initial state of the flag and text based on the determined language
-            let flagSrc = '';
-            let langText = '';
-            let langFull = '';
+// Set initial language on page load
+document.addEventListener('DOMContentLoaded', () => {
+    const supportedLanguages = ['en', 'es', 'pt'];
+    const storedLanguage = localStorage.getItem('userLanguage');
+    
+    // Determine initial language (default to English)
+    let initialLang = 'en';
+    
+    // Check stored language first
+    if (storedLanguage && supportedLanguages.includes(storedLanguage)) {
+        initialLang = storedLanguage;
+    } 
+    // Then check browser language
+    else {
+        const browserLang = navigator.language.split('-')[0];
+        if (supportedLanguages.includes(browserLang)) {
+            initialLang = browserLang;
+        }
+    }
 
-            switch (initialLang) {
-                case 'en':
-                    flagSrc = 'https://flagcdn.com/w20/us.png';
-                    langText = 'EN';
-                    langFull = 'English';
-                    break;
-                case 'es':
-                    flagSrc = 'https://flagcdn.com/w20/es.png';
-                    langText = 'ES';
-                    langFull = 'Español';
-                    break;
-                case 'pt':
-                    flagSrc = 'https://flagcdn.com/w20/br.png';
-                    langText = 'PT';
-                    langFull = 'Português';
-                    break;
-            }
-            desktopFlag.src = flagSrc;
-            desktopFlag.alt = langFull;
-            desktopLangText.textContent = langText;
-        });
-
+    // Trigger the language change (without event)
+    changeLanguage({ preventDefault: () => {} }, initialLang);
+});
 
 // Modal functionality (assuming you already have this)
 function openAboutModal() {
