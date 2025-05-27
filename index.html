@@ -61,12 +61,8 @@
             menu.classList.toggle('hidden');
         }
 
-        // Language selector
-        function changeLanguage(lang) {
-            // Implement your language change logic here
-            console.log('Changing language to:', lang);
-        }
-
+      
+        
         // Text animation for hero section
         document.addEventListener('DOMContentLoaded', function() {
             const heroText = document.getElementById('hero-text');
@@ -253,14 +249,14 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
         }
-        .country-flag {
+        /* .country-flag {
             height: 24px;
             width: 36px;
             object-fit: cover;
             border-radius: 2px;
             margin-right: 10px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
+        } */
         .bg-soft-teal {
             background-color: #4fd1c5;
         }
@@ -455,6 +451,11 @@
                 min-height: 70vh;
             }
         }
+        /* Basic styling for country flags */
+        .country-flag {
+            border-radius: 2px; /* Slightly rounded corners for flags */
+            box-shadow: 0 0 2px rgba(0,0,0,0.1); /* Subtle shadow for flags */
+        }
     </style>
 </head>
 <body class="min-h-screen bg-gray-100 text-gray-800 font-sans">
@@ -471,26 +472,30 @@
                 <a href="#team" class="text-gray-600 hover:text-soft-teal px-3 py-2 rounded-md text-lg transition-colors duration-300" data-lang='{"en": "Team", "es": "Equipo", "pt": "Equipe"}'>Equipe</a>
                 <a href="#contact" class="text-gray-600 hover:text-soft-teal px-3 py-2 rounded-md text-lg transition-colors duration-300" data-lang='{"en": "Contact", "es": "Contacto", "pt": "Contato"}'>Contato</a>
                 
-               <div class="relative group ml-4">
-                <button class="flex items-center text-gray-600 hover:text-soft-teal">
+               <div class="relative group inline-block ml-4">
+                <button class="flex items-center text-gray-600 hover:text-blue-500 rounded-lg p-2 transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <img id="desktop-flag" src="https://flagcdn.com/w20/us.png" alt="English" class="country-flag">
-                    <span id="desktop-lang-text" class="ml-1">EN</span>
-                    <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                    <span id="desktop-lang-text" class="ml-2 font-semibold text-sm">EN</span>
+                    <i class="fas fa-chevron-down ml-2 text-xs"></i>
                 </button>
-                <div class="absolute right-0 mt-2 w-40 bg-white rounded-md shadow-lg py-1 z-50 hidden group-hover:block transition-opacity duration-300 delay-300 opacity-0 group-hover:opacity-100">
-                    <a href="#" onclick="changeLanguage('en')" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 flex items-center">
+
+                <div class="absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-xl py-1 z-50
+                            opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto
+                            transition-opacity duration-200 ease-in-out origin-top-right">
+                    <a href="#" onclick="changeLanguage(event, 'en')" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 flex items-center">
                         <img src="https://flagcdn.com/w20/us.png" alt="English" class="country-flag">
                         <span class="ml-2">English</span>
                     </a>
-                    <a href="#" onclick="changeLanguage('es')" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 flex items-center">
+                    <a href="#" onclick="changeLanguage(event, 'es')" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 flex items-center">
                         <img src="https://flagcdn.com/w20/es.png" alt="Español" class="country-flag">
                         <span class="ml-2">Español</span>
                     </a>
-                    <a href="#" onclick="changeLanguage('pt')" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 flex items-center">
+                    <a href="#" onclick="changeLanguage(event, 'pt')" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 flex items-center">
                         <img src="https://flagcdn.com/w20/br.png" alt="Português" class="country-flag">
                         <span class="ml-2">Português</span>
                     </a>
-            </div>
+                </div>
+    </div>
             </div>
             
             <button id="mobile-menu-button" class="md:hidden text-gray-600 hover:text-soft-teal focus:outline-none" onclick="toggleMenu()">
@@ -510,27 +515,30 @@
                 <a href="javascript:void(0)" onclick="openAboutModal()" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-soft-teal" data-lang='{"en": "Who We Are", "es": "Quiénes Somos", "pt": "Quem Somos"}'>Quem Somos</a>
                 <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-soft-teal" data-lang='{"en": "Contact", "es": "Contacto", "pt": "Contato"}'>Contato</a>
                 
-            <div class="relative group ml-4">
-                <button class="flex items-center text-gray-600 hover:text-soft-teal">
-                    <img id="desktop-flag" src="https://flagcdn.com/w20/us.png" alt="English" class="country-flag">
-                    <span id="desktop-lang-text" class="ml-1">EN</span>
-                    <i class="fas fa-chevron-down ml-1 text-xs"></i>
-                </button>
-                <div class="absolute right-0 mt-2 w-40 bg-white rounded-md shadow-lg py-1 z-50 hidden group-hover:block transition-opacity duration-300 delay-300 opacity-0 group-hover:opacity-100">
-                    <a href="#" onclick="changeLanguage('en')" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 flex items-center">
-                        <img src="https://flagcdn.com/w20/us.png" alt="English" class="country-flag">
-                        <span class="ml-2">English</span>
-                    </a>
-                    <a href="#" onclick="changeLanguage('es')" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 flex items-center">
-                        <img src="https://flagcdn.com/w20/es.png" alt="Español" class="country-flag">
-                        <span class="ml-2">Español</span>
-                    </a>
-                    <a href="#" onclick="changeLanguage('pt')" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 flex items-center">
-                        <img src="https://flagcdn.com/w20/br.png" alt="Português" class="country-flag">
-                        <span class="ml-2">Português</span>
-                    </a>
-            </div>
-            </div>
+            <div class="relative group inline-block ml-4">
+        <button class="flex items-center text-gray-600 hover:text-blue-500 rounded-lg p-2 transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <img id="desktop-flag" src="https://flagcdn.com/w20/us.png" alt="English" class="country-flag">
+            <span id="desktop-lang-text" class="ml-2 font-semibold text-sm">EN</span>
+            <i class="fas fa-chevron-down ml-2 text-xs"></i>
+        </button>
+
+        <div class="absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-xl py-1 z-50
+                    opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto
+                    transition-opacity duration-200 ease-in-out origin-top-right">
+            <a href="#" onclick="changeLanguage(event, 'en')" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 flex items-center">
+                <img src="https://flagcdn.com/w20/us.png" alt="English" class="country-flag">
+                <span class="ml-2">English</span>
+            </a>
+            <a href="#" onclick="changeLanguage(event, 'es')" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 flex items-center">
+                <img src="https://flagcdn.com/w20/es.png" alt="Español" class="country-flag">
+                <span class="ml-2">Español</span>
+            </a>
+            <a href="#" onclick="changeLanguage(event, 'pt')" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 flex items-center">
+                <img src="https://flagcdn.com/w20/br.png" alt="Português" class="country-flag">
+                <span class="ml-2">Português</span>
+            </a>
+        </div>
+    </div>
             </div>
         </div>
     </header>
@@ -767,49 +775,101 @@
 </footer>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Cache language elements and desktop language selector elements once on DOM load
-    const translatableElements = document.querySelectorAll('[data-lang]');
-    const desktopFlag = document.getElementById('desktop-flag');
-    const desktopLangText = document.getElementById('desktop-lang-text');
+ function changeLanguage(event, lang) {
+            event.preventDefault(); // Prevent the default link behavior (e.g., navigating to '#')
 
-    // Set default language to English on page load
-    changeLanguage('en', translatableElements, desktopFlag, desktopLangText);
-});
+            const desktopFlag = document.getElementById('desktop-flag');
+            const desktopLangText = document.getElementById('desktop-lang-text');
 
-function changeLanguage(lang, translatableElements, desktopFlag, desktopLangText) {
-    translatableElements.forEach(element => {
-        try {
-            const translations = JSON.parse(element.getAttribute('data-lang'));
-            if (translations[lang]) {
-                // Handle innerHTML for elements with bold tags like the modal 'About Us' paragraph
-                if (element.tagName === 'P' || element.tagName === 'H3' || element.tagName === 'LABEL' || element.tagName === 'SPAN' || element.tagName === 'OPTION' || element.tagName === 'BUTTON') {
-                    element.innerHTML = translations[lang];
-                } else {
-                    element.textContent = translations[lang];
+            let flagSrc = '';
+            let langText = '';
+            let langFull = '';
+
+            // Determine the correct flag source, short text, and full language name
+            switch (lang) {
+                case 'en':
+                    flagSrc = 'https://flagcdn.com/w20/us.png';
+                    langText = 'EN';
+                    langFull = 'English';
+                    break;
+                case 'es':
+                    flagSrc = 'https://flagcdn.com/w20/es.png';
+                    langText = 'ES';
+                    langFull = 'Español';
+                    break;
+                case 'pt':
+                    flagSrc = 'https://flagcdn.com/w20/br.png';
+                    langText = 'PT';
+                    langFull = 'Português';
+                    break;
+                default:
+                    // Fallback to English if an unknown language code is provided
+                    flagSrc = 'https://flagcdn.com/w20/us.png';
+                    langText = 'EN';
+                    langFull = 'English';
+            }
+
+            // Update the flag image and language text on the main button
+            desktopFlag.src = flagSrc;
+            desktopFlag.alt = langFull;
+            desktopLangText.textContent = langText;
+
+            console.log(`Language changed to: ${langFull} (${lang})`);
+            // Store the selected language in localStorage for future visits
+            localStorage.setItem('userLanguage', lang);
+
+            // In a real application, you would typically update the content
+            // on the page based on the selected language here.
+            // Example:
+            // updatePageContent(lang);
+        }
+
+        // Set the initial language and flag when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            const storedLanguage = localStorage.getItem('userLanguage');
+            const desktopFlag = document.getElementById('desktop-flag');
+            const desktopLangText = document.getElementById('desktop-lang-text');
+
+            let initialLang = 'en'; // Default language if no preference is stored
+
+            // Check if a language preference is stored in localStorage
+            if (storedLanguage && ['pt', 'en', 'es'].includes(storedLanguage)) {
+                initialLang = storedLanguage;
+            } else {
+                // If not, try to determine from the browser's language setting
+                const browserLang = navigator.language.split('-')[0];
+                if (['pt', 'en', 'es'].includes(browserLang)) {
+                    initialLang = browserLang;
                 }
             }
-        } catch (e) {
-            console.error('Error parsing data-lang attribute:', element.getAttribute('data-lang'), e);
-        }
-    });
 
-    // Update the flag and text in the desktop language selector
-    if (desktopFlag && desktopLangText) {
-        const flagMap = {
-            'en': { src: 'https://flagcdn.com/w20/us.png', alt: 'English', text: 'EN' },
-            'es': { src: 'https://flagcdn.com/w20/es.png', alt: 'Español', text: 'ES' },
-            'pt': { src: 'https://flagcdn.com/w20/br.png', alt: 'Português', text: 'PT' }
-        };
+            // Manually set the initial state of the flag and text based on the determined language
+            let flagSrc = '';
+            let langText = '';
+            let langFull = '';
 
-        const selectedFlag = flagMap[lang];
-        if (selectedFlag) {
-            desktopFlag.src = selectedFlag.src;
-            desktopFlag.alt = selectedFlag.alt;
-            desktopLangText.textContent = selectedFlag.text;
-        }
-    }
-}
+            switch (initialLang) {
+                case 'en':
+                    flagSrc = 'https://flagcdn.com/w20/us.png';
+                    langText = 'EN';
+                    langFull = 'English';
+                    break;
+                case 'es':
+                    flagSrc = 'https://flagcdn.com/w20/es.png';
+                    langText = 'ES';
+                    langFull = 'Español';
+                    break;
+                case 'pt':
+                    flagSrc = 'https://flagcdn.com/w20/br.png';
+                    langText = 'PT';
+                    langFull = 'Português';
+                    break;
+            }
+            desktopFlag.src = flagSrc;
+            desktopFlag.alt = langFull;
+            desktopLangText.textContent = langText;
+        });
+
 
 // Modal functionality (assuming you already have this)
 function openAboutModal() {
