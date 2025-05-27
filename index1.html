@@ -775,65 +775,66 @@
 </footer>
 
 <script>
- function changeLanguage(event, lang) {
-    event.preventDefault();
     
-    const desktopFlag = document.getElementById('desktop-flag');
-    const desktopLangText = document.getElementById('desktop-lang-text');
-
-    // Language configuration object
-    const languages = {
-        'en': {
-            flag: 'https://flagcdn.com/w20/us.png',
-            code: 'EN',
-            name: 'English'
-        },
-        'es': {
-            flag: 'https://flagcdn.com/w20/es.png',
-            code: 'ES',
-            name: 'Español'
-        },
-        'pt': {
-            flag: 'https://flagcdn.com/w20/br.png',
-            code: 'PT',
-            name: 'Português'
-        }
-    };
-
-    // Get selected language or default to English
-    const selectedLang = languages[lang] || languages['en'];
-
-    // Update UI
-    desktopFlag.src = selectedLang.flag;
-    desktopFlag.alt = selectedLang.name;
-    desktopLangText.textContent = selectedLang.code;
-
-    console.log(`Language changed to: ${selectedLang.name} (${lang})`);
-    localStorage.setItem('userLanguage', lang);
-}
-
-// Set initial language on page load
-document.addEventListener('DOMContentLoaded', () => {
-    const supportedLanguages = ['en', 'es', 'pt'];
-    const storedLanguage = localStorage.getItem('userLanguage');
+//  function changeLanguage(event, lang) {
+//     event.preventDefault();
     
-    // Determine initial language (default to English)
-    let initialLang = 'en';
-    
-    // Check stored language first
-    if (storedLanguage && supportedLanguages.includes(storedLanguage)) {
-        initialLang = storedLanguage;
-    } 
-    // Then check browser language
-    else {
-        const browserLang = navigator.language.split('-')[0];
-        if (supportedLanguages.includes(browserLang)) {
-            initialLang = browserLang;
-        }
-    }
+//     const desktopFlag = document.getElementById('desktop-flag');
+//     const desktopLangText = document.getElementById('desktop-lang-text');
 
-    // Trigger the language change (without event)
-    changeLanguage({ preventDefault: () => {} }, initialLang);
+//     // Language configuration object
+//     const languages = {
+//         'en': {
+//             flag: 'https://flagcdn.com/w20/us.png',
+//             code: 'EN',
+//             name: 'English'
+//         },
+//         'es': {
+//             flag: 'https://flagcdn.com/w20/es.png',
+//             code: 'ES',
+//             name: 'Español'
+//         },
+//         'pt': {
+//             flag: 'https://flagcdn.com/w20/br.png',
+//             code: 'PT',
+//             name: 'Português'
+//         }
+//     };
+
+//     // Get selected language or default to English
+//     const selectedLang = languages[lang] || languages['en'];
+
+//     // Update UI
+//     desktopFlag.src = selectedLang.flag;
+//     desktopFlag.alt = selectedLang.name;
+//     desktopLangText.textContent = selectedLang.code;
+
+//     console.log(`Language changed to: ${selectedLang.name} (${lang})`);
+//     localStorage.setItem('userLanguage', lang);
+// }
+
+// // Set initial language on page load
+// document.addEventListener('DOMContentLoaded', () => {
+//     const supportedLanguages = ['en', 'es', 'pt'];
+//     const storedLanguage = localStorage.getItem('userLanguage');
+    
+//     // Determine initial language (default to English)
+//     let initialLang = 'en';
+    
+//     // Check stored language first
+//     if (storedLanguage && supportedLanguages.includes(storedLanguage)) {
+//         initialLang = storedLanguage;
+//     } 
+//     // Then check browser language
+//     else {
+//         const browserLang = navigator.language.split('-')[0];
+//         if (supportedLanguages.includes(browserLang)) {
+//             initialLang = browserLang;
+//         }
+//     }
+
+//     // Trigger the language change (without event)
+//     changeLanguage({ preventDefault: () => {} }, initialLang);
 });
 
 // Modal functionality (assuming you already have this)
