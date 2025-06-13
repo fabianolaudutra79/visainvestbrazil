@@ -1,8 +1,8 @@
 {
-  "name": "wisecrypto",
+  "name": "visainvestbrazil",
   "version": "1.0.0",
   "description": "visainvestbrazil",
-  "main": "index.js",
+  "main": "principal.js",
   "scripts": {
     "sync": "browser-sync start --server --files \"**/*\"",
     "build": "npx tailwindcss  --postcss -i ./css/tailwind.css -o ./css/tailwind-runtime.css --watch",
@@ -17,7 +17,7 @@
     "design",
     "websites"
   ],
-  "author": "wisecrypto",
+  "author": "wisecrypto.digital",
   "license": "MIT",
   "devDependencies": {
     "browser-sync": "^3.0.3",
