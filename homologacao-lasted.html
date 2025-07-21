@@ -1,0 +1,1524 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VisaInvest Brazil</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K75C15PV9L"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-K75C15PV9L');
+    </script>
+    <style>
+            .animate-spin {
+                animation: spin 1s linear infinite;
+            }
+
+            @keyframes spin {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+
+            #successModal {
+                transition: opacity 0.3s ease;
+            }
+
+        /* Estilos melhorados para o modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background-color: #f8fafc;
+            margin: 5% auto;
+            padding: 40px;
+            border-radius: 15px;
+            width: 70%;
+            max-width: 800px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            position: relative;
+            animation: modalFadeIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(79, 209, 197, 0.3);
+        }
+        
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .close-modal {
+            color: #94a3b8;
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            color: #4fd1c5;
+            transform: rotate(90deg);
+        }
+        
+        .modal-content h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 20px;
+            text-align: center;
+            background: linear-gradient(90deg, #4fd1c5, #38b2ac);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .modal-content p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #334155;
+            text-align: justify;
+            animation: textFadeIn 1s ease-out;
+        }
+        
+        @keyframes textFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Efeito de pulso no botão de fechar */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .modal:not(:hover) .close-modal {
+            animation: pulse 2s infinite;
+        }
+        
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 90%;
+                padding: 30px 20px;
+                margin: 10% auto;
+            }
+            
+            .modal-content h3 {
+                font-size: 1.8rem;
+            }
+            
+            .modal-content p {
+                font-size: 1.1rem;
+            }
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(47,93,98,0.9) 0%, rgba(94,139,126,0.9) 100%);
+        }
+        .hero-image {
+            background-image: url('./images/florianopolis.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .country-flag {
+            height: 24px;
+            width: 36px;
+            object-fit: cover;
+            border-radius: 2px;
+            margin-right: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .bg-soft-teal {
+            background-color: #4fd1c5;
+        }
+        .text-soft-teal {
+            color: #4fd1c5;
+        }
+        .border-soft-teal {
+            border-color: #4fd1c5;
+        }
+        .modern-float-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            z-index: 999;
+        }
+        
+        .modern-float-btn {
+            position: relative;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.1),
+                inset 0 4px 8px rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .whatsapp-btn {
+            background: rgba(37, 211, 102, 0.85);
+        }
+        
+        .telegram-btn {
+            background: rgba(0, 136, 204, 0.85);
+        }
+        
+        .icon-container {
+            position: relative;
+            z-index: 2;
+            width: 24px;
+            height: 24px;
+        }
+        
+        .icon {
+            width: 100%;
+            height: 100%;
+            fill: white;
+        }
+        
+        .wave {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: scale(0);
+            opacity: 1;
+            animation: wave 1s linear;
+            pointer-events: none;
+        }
+        
+        .tooltip {
+            position: absolute;
+            right: 70px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s;
+        }
+        
+        .modern-float-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 
+                0 12px 40px rgba(0, 0, 0, 0.15),
+                inset 0 4px 8px rgba(255, 255, 255, 0.3);
+        }
+        
+        .modern-float-btn:hover .tooltip {
+            opacity: 1;
+            right: 75px;
+        }
+        
+        @keyframes wave {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-text {
+            animation: fadeInUp 1.5s ease forwards;
+        }
+        
+        /* Responsivo para mobile */
+        @media (max-width: 768px) {
+            .modern-float-container {
+                bottom: 20px;
+                right: 20px;
+                gap: 15px;
+            }
+            
+            .modern-float-btn {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .icon-container {
+                width: 20px;
+                height: 20px;
+            }
+            
+            .tooltip {
+                font-size: 12px;
+                padding: 4px 8px;
+            }
+            
+            .modern-float-btn:hover .tooltip {
+                right: 60px;
+            }
+            
+            #desktop-menu {
+                display: none;
+            }
+            
+            #mobile-menu-button {
+                display: block;
+            }
+            
+            #mobile-menu {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: white;
+                padding: 1rem;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+        }
+        
+        @media (min-width: 769px) {
+            #mobile-menu-button {
+                display: none;
+            }
+            
+            #mobile-menu {
+                display: none;
+            }
+        }
+        .hero-carousel {
+            height: 70vh;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%);
+        }
+        
+        @media (max-width: 768px) {
+            .hero-carousel {
+                height: auto;
+                min-height: 70vh;
+            }
+        }
+        
+        /* Language dropdown styles */
+        .language-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .language-dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 0.375rem;
+        }
+        
+        .language-dropdown:hover .language-dropdown-content {
+            display: block;
+        }
+        
+        .language-dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.3s;
+        }
+        
+        .language-dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-100 text-gray-800 font-sans">
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <a href="#" > <img src="visainvest.jpeg" alt="VisaInvest Logo" class="h-12 mr-4"></a>                            
+                <a href="#" class="text-3xl font-bold text-gray-700">VisaInvest Brazil</a>
+            </div>
+            
+            <div class="hidden md:flex items-center space-x-4" id="desktop-menu">
+                <a href="javascript:void(0)" onclick="openAboutModal()" class="text-gray-600 hover:text-soft-teal px-3 py-2 rounded-md text-lg transition-colors duration-300" data-lang='{"en": "Who We Are", "es": "Quiénes Somos", "pt": "Quem Somos"}'>Quem Somos</a>
+                <a href="#services" class="text-gray-600 hover:text-soft-teal px-3 py-2 rounded-md text-lg transition-colors duration-300" data-lang='{"en": "Services", "es": "Servicios", "pt": "Serviços"}'>Serviços</a>
+                <a href="#team" class="text-gray-600 hover:text-soft-teal px-3 py-2 rounded-md text-lg transition-colors duration-300" data-lang='{"en": "Team", "es": "Equipo", "pt": "Equipe"}'>Equipe</a>
+                <a href="#blog" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-soft-teal">Blog</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-soft-teal" data-lang='{"en": "Contact", "es": "Contacto", "pt": "Contato"}'>Contato</a>
+                <!-- <a href="#contact" class="text-gray-600 hover:text-soft-teal px-3 py-2 rounded-md text-lg transition-colors duration-300" data-lang='{"en": "Contact", "es": "Contacto", "pt": "Contato"}'>Contato</a>
+                  -->
+                <div class="language-dropdown ml-4">
+                    <button class="flex items-center text-gray-600 hover:text-soft-teal">
+                        <img id="desktop-flag" src="https://flagcdn.com/w20/br.png" alt="Português" class="country-flag">
+                        <span id="desktop-lang-text" class="ml-1">PT</span>
+                        <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                    </button>
+                    <div class="language-dropdown-content">
+                        <a href="#" onclick="changeLanguage( event, 'en')" class="flex items-center">
+                            <img src="https://flagcdn.com/w20/us.png" alt="English" class="country-flag">
+                            <span class="ml-2">English</span>
+                        </a>
+                        <a href="#" onclick="changeLanguage(event, 'es')" class="flex items-center">
+                            <img src="https://flagcdn.com/w20/es.png" alt="Español" class="country-flag">
+                            <span class="ml-2">Español</span>
+                        </a>
+                        <a href="#" onclick="changeLanguage(event, 'pt')" class="flex items-center">
+                            <img src="https://flagcdn.com/w20/br.png" alt="Português" class="country-flag">
+                            <span class="ml-2">Português</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <button id="mobile-menu-button" class="md:hidden text-gray-600 hover:text-soft-teal focus:outline-none" onclick="toggleMenu()">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </nav>
+        
+        <div id="mobile-menu" class="hidden md:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#services" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-soft-teal" data-lang='{"en": "Services", "es": "Servicios", "pt": "Serviços"}'>Serviços</a>
+                <a href="#team" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-soft-teal" data-lang='{"en": "Team", "es": "Equipo", "pt": "Equipe"}'>Equipe</a>
+                <a href="javascript:void(0)" onclick="openAboutModal()" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-soft-teal" data-lang='{"en": "Who We Are", "es": "Quiénes Somos", "pt": "Quem Somos"}'>Quem Somos</a>
+                <a href="#blog" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-soft-teal">Blog</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-soft-teal" data-lang='{"en": "Contact", "es": "Contacto", "pt": "Contato"}'>Contato</a>
+                <!-- <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-soft-teal" data-lang='{"en": "Contact", "es": "Contacto", "pt": "Contato"}'>Contato</a>
+                 -->
+                <div class="pt-4 pb-2 border-t border-gray-200">
+                    <!-- <span class="text-gray-600 mr-3" data-lang='{"en": "Language:", "es": "Idioma:", "pt": "Idioma:"}'>Idioma:</span> -->
+                    <a href="#" onclick="changeLanguage(event , 'en')" class="mr-2">
+                        <img src="https://flagcdn.com/w20/us.png" alt="English" class="country-flag">
+                    </a>
+                    <a href="#" onclick="changeLanguage( event, 'es')" class="mr-2">
+                        <img src="https://flagcdn.com/w20/es.png" alt="Español" class="country-flag">
+                    </a>
+                    <a href="#" onclick="changeLanguage(event, 'pt')">
+                        <img src="https://flagcdn.com/w20/br.png" alt="Português" class="country-flag">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+ 
+   <div class="hero-carousel relative overflow-hidden">
+    <div class="relative h-screen">
+        <!-- Slide 1 - Florianópolis -->
+        <div class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out opacity-100" style="background-image: url('images/florianopolis.jpg')">
+            <div class="hero-gradient absolute inset-0 py-20 px-3">
+                <div class="max-w-7xl mx-auto">
+                    <div class="md:w-1/2 text-white">
+                        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 animate-text" 
+                        data-lang='{"en": "DISCOVER BRAZIL AS YOUR NEW HOME", 
+                                    "es": "DESCUBRA BRASIL COMO SU NUEVO HOGAR",
+                                    "pt": "DESCUBRA O BRASIL COMO SEU NOVO LAR"}'>
+                            DESCUBRA O BRASIL COMO SEU NOVO LAR
+                        </h1>
+                         <p class="text-xl mb-8" 
+                         data-lang='{"en": "Welcome to VisaInvest Brazil, your consultancy on visas, residence and legalization for foreigners in Brazil.", 
+                         "es": "Bienvenido a VisaInvest Brasil, su consultoría sobre visas, residencia y legalización para extranjeros en Brasil.", 
+                         "pt": "Seja bem-vindo à VisaInvest Brazil, sua assessoria em vistos, residência e legalização para estrangeiros no Brasil."}'>
+                            Seja bem-vindo à VisaInvest Brazil, sua assessoria em vistos, residência e legalização para estrangeiros no Brasil.
+                         </p>
+                          <a href="#" onclick="window.open('https://wa.me/5548999373821')" class="bg-white text-gray-800 font-bold rounded-full py-3 px-8 text-lg hover:bg-gray-100 transition duration-300 inline-block"
+                            data-lang='{"en": "Contact Us", "es": "Contáctenos", "pt": "Fale Conosco"}'>
+                                Fale Conosco
+                            </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 2 - Ilha -->
+        <div class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out opacity-0" style="background-image: url('images/ilha.jpg')">
+            <div class="hero-gradient absolute inset-0 py-20 px-3">
+                <div class="max-w-7xl mx-auto">
+                    <div class="md:w-1/2 text-white">
+                        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 animate-text" 
+                        data-lang='{"en": "WANT TO RESIDE IN BRAZIL", 
+                         "es": "QUIERO RESIDIR EN BRASIL",
+                         "pt": "DESEJA RESIDIR NO BRASIL"}'>
+                            DESEJA RESIDIR NO BRASIL                            
+                        </h1>
+                        <p class="text-xl mb-8" 
+                        data-lang='{
+                            "en": "We are a consultancy specialized in immigration for foreigners who wish to reside in Brazil, whether through Real Estate Investments, as Digital Nomads or Retirees.",
+                            "es": "Somos una consultoría especializada en inmigración para extranjeros que deseen residir en Brasil, ya sea a través de Inversiones Inmobiliarias, como Nómadas Digitales o Jubilados.",
+                            "pt": "Somos uma consultoria especializada em imigração de estrangeiros que desejam residir no Brasil, seja por meio de Investimentos Imobiliários, como nômades Digitais ou Aposentados."
+                        }'>
+                        Somos uma consultoria especializada em imigração de estrangeiros que desejam residir no Brasil, 
+                        seja por meio de Investimentos Imobiliários, como nômades Digitais ou Aposentados.
+                    </p>  
+                     <a href="#" onclick="window.open('https://wa.me/5548999373821')" class="bg-white text-gray-800 font-bold rounded-full py-3 px-8 text-lg hover:bg-gray-100 transition duration-300 inline-block"
+                    data-lang='{"en": "Contact Us", "es": "Contáctenos", "pt": "Fale Conosco"}'>
+                        Fale Conosco
+                    </a>                     
+                </div>
+                </div>
+            </div>
+        </div>
+        
+       
+        <!-- Slide 4 - Pão de Açúcar -->
+        <div class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out opacity-0" style="background-image: url('images/paoacucar.jpg')">
+            <div class="hero-gradient absolute inset-0 py-20 px-3">
+                <div class="max-w-7xl mx-auto">
+                    <div class="md:w-1/2 text-white">
+                        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 animate-text" 
+                        data-lang='{"en": "COMPLETE SUPPORT FOR YOUR VISA", "es": "SOPORTE COMPLETO PARA TU VISA", "pt": "ASSESSORIA COMPLETA PARA O SEU VISTO"}'>
+                            ASSESSORIA COMPLETA PARA O SEU VISTO
+                        </h1>
+                        <p class="text-xl mb-8" 
+                        data-lang='{
+                            "en": "We offer complete, end-to-end, personalized assistance for you and your family to settle in Brazil.",
+                            "es": "Ofrecemos asistencia completa, personalizada y de principio a fin para que usted y su familia puedan instalarse en Brasil.",
+                            "pt": "Oferecemos assessoria completa de ponta a ponta e personalizada para você e sua família se estabelecerem no Brasil."
+                        }'>
+                        Oferecemos assessoria completa de ponta a ponta e personalizada para você e sua família se estabelecerem no Brasil.
+                        </p>
+                       <a href="#" onclick="window.open('https://wa.me/5548999373821')" class="bg-white text-gray-800 font-bold rounded-full py-3 px-8 text-lg hover:bg-gray-100 transition duration-300 inline-block"
+                            data-lang='{"en": "Contact Us", "es": "Contáctenos", "pt": "Fale Conosco"}'>
+                                Fale Conosco
+                            </a>               
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 5 - Praia -->
+        <div class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out opacity-0" style="background-image: url('images/praia.jpg')">
+            <div class="hero-gradient absolute inset-0 py-20 px-3">
+                <div class="max-w-7xl mx-auto">
+                    <div class="md:w-1/2 text-white">
+                        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 animate-text" data-lang='{"en": "LIVE ELEGANTLY ", 
+                        "es": "VIVA CON ELEGANCIA ", "pt": "VIVER COM ELEGÂNCIA"}'>
+                            VIVER COM ELEGÂNCIA                           
+                        </h1>
+                        <p class="text-xl mb-8" 
+                        data-lang='{
+                            "en": "This is the destination for those looking to invest intelligently, live elegantly and enjoy the countrys natural riches.",
+                            "es": "Este es el destino para quienes buscan invertir inteligentemente, vivir elegantemente y disfrutar las riquezas naturales de este país.",
+                            "pt": "Este é o destino para quem busca investir com inteligência, viver com elegância e aproveitar as riquezas naturais deste país."
+                        }'>
+                        Este é o destino para quem busca investir com inteligência, viver com elegância e aproveitar as riquezas naturais deste país.
+                        </p>
+                         <a href="#" onclick="window.open('https://wa.me/5548999373821')" class="bg-white text-gray-800 font-bold rounded-full py-3 px-8 text-lg hover:bg-gray-100 transition duration-300 inline-block"
+                            data-lang='{"en": "Contact Us", "es": "Contáctenos", "pt": "Fale Conosco"}'>
+                                Fale Conosco
+                            </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <section id="services" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center text-gray-700 mb-16" data-lang='{"en": "Our Specialized Services", "es": "Nuestros Servicios Especializados", "pt": "Nossos Serviços Especializados"}'>Nossos Serviços Especializados</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 flex flex-col items-center text-center">
+                    <div class="flex items-center justify-center w-16 h-16 mb-6 rounded-full bg-soft-teal text-white shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" class="w-8 h-8">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3" data-lang='{"en": "Residency Authorization based on Real Estate Investment in Brazil", "es": "Autorización de Residencia basada en Inversión Inmobiliaria en Brasil", "pt": "Autorização de Residência com base em Investimento Imobiliário no Brasil"}'>Autorização de Residência com base em Investimento Imobiliário no Brasil</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed" data-lang='{"en": "is a temporary or permanent visa granted by the Brazilian government to foreigners who make significant investments in the countrys real estate market. This modality aims to attract foreign capital and boost economic development, offering the investor and their family the right to legally reside in Brazil.", "es": "es una visa temporal o permanente otorgada por el gobierno brasileño a extranjeros que realizan inversiones significativas en el mercado inmobiliario del país. Esta modalidad tiene como objetivo atraer capital extranjero e impulsar el desarrollo económico, ofreciendo al inversionista y su familia el derecho a residir legalmente en Brasil.", 
+                    "pt": "é um visto temporário ou permanente concedido pelo governo brasileiro a estrangeiros que realizam investimentos significativos no mercado imobiliário do país. Essa modalidade visa atrair capital estrangeiro e impulsionar o desenvolvimento econômico, oferecendo ao investidor e sua família o direito de residir legalmente no Brasil."}'>é um visto temporário ou permanente concedido pelo governo brasileiro 
+                        a estrangeiros que realizam investimentos significativos no mercado imobiliário do país. Essa modalidade visa atrair capital estrangeiro 
+                        e impulsionar o desenvolvimento econômico, oferecendo ao investidor e sua família o direito de residir legalmente no Brasil.</p>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 flex flex-col items-center text-center">
+                    <div class="flex items-center justify-center w-16 h-16 mb-6 rounded-full bg-soft-teal text-white shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" class="w-8 h-8">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3" data-lang='{"en": "Residency Authorization for Digital Nomads (or Digital Nomad Visa)", "es": "Autorización de Residencia para Nómada Digital (o Visa de Nómada Digital)", "pt": "Autorização de Residência para Nômade Digital (ou Visto de Nômade Digital)"}'>Autorização de Residência para Nômade Digital (ou Visto de Nômade Digital)</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed" data-lang='{"en": "is a temporary visa that allows remote professionals and freelancers from other countries to live and work legally in Brazil for a determined period, provided they prove external income and meet the requirements established by the Brazilian government. This modality was created to attract remote workers, digital entrepreneurs, and freelancers who wish to live in Brazil while maintaining their jobs or businesses abroad.", "es": "es una visa temporal que permite a profesionales remotos y freelancers de otros países vivir y trabajar legalmente en Brasil por un período determinado, siempre que demuestren ingresos externos y cumplan con los requisitos establecidos por el gobierno brasileño. Esta modalidad fue creada para atraer a trabajadores remotos, emprendedores digitales y freelancers que desean vivir en Brasil mientras mantienen sus trabajos o negocios en el extranjero.", "pt": "é um visto temporário que permite que profissionais remotos e freelancers de outros países morem e trabalhem legalmente no Brasil por um período determinado, desde que comprovem renda externa e atendam aos requisitos estabelecidos pelo governo brasileiro. Essa modalidade foi criada para atrair trabalhadores remotos, empreendedores digitais e freelancers que desejam viver no Brasil enquanto mantêm seus empregos ou negócios no exterior."}'>é um visto temporário que permite que profissionais remotos 
+                        e freelancers de outros países morem e trabalhem legalmente no Brasil por um período determinado, desde que 
+                        comprovem renda externa e atendam aos requisitos estabelecidos pelo governo brasileiro.
+                        Essa modalidade foi criada para atrair trabalhadores remotos, empreendedores digitais e freelancers 
+                        que desejam viver no Brasil enquanto mantêm seus empregos ou negócios no exterior.</p>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 flex flex-col items-center text-center">
+                    <div class="flex items-center justify-center w-16 h-16 mb-6 rounded-full bg-soft-teal text-white shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" class="w-8 h-8">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3" data-lang='{"en": "Residency Authorization for Retirees or Pensioners", "es": "Autorización de Residencia para Jubilados o Pensionistas", "pt": "Autorização de Residência para Aposentados ou Pensionistas"}'>Autorização de Residência para Aposentados ou Pensionistas</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed" data-lang='{"en": "is a permanent visa granted by the Brazilian government to foreigners who receive a fixed income from retirement or death pension from a foreign source. This visa allows the beneficiary and their dependents to live legally in Brazil permanently, provided they prove stable and continuous income.", "es": "es una visa permanente otorgada por el gobierno brasileño a extranjeros que reciben ingresos fijos por jubilación o pensión por muerte de una fuente extranjera. Esta visa permite que el beneficiario y sus dependientes vivan legalmente en Brasil de forma definitiva, siempre que demuestren ingresos estables y continuos.", "pt": "é um visto permanente concedido pelo governo brasileiro a estrangeiros que recebem renda fixa de aposentadoria ou pensão por morte de fonte estrangeira. Esse visto permite que o beneficiário e seus dependentes morem legalmente no Brasil de forma definitiva, desde que comprovem renda estável e contínua."}'>é um visto permanente concedido pelo governo brasileiro a estrangeiros 
+                        que recebem renda fixa de aposentadoria ou pensão por morte de fonte estrangeira. Esse visto permite que o beneficiário e 
+                        seus dependentes morem legalmente no Brasil de forma definitiva, desde que comprovem renda estável e contínua.</p>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 flex flex-col items-center text-center">
+                    <div class="flex items-center justify-center w-16 h-16 mb-6 rounded-full bg-soft-teal text-white shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" class="w-8 h-8">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3" data-lang='{"en": "Residency authorization with employment ties in Brazil for foreigners", "es": "Autorización de residencia con vínculo laboral en Brasil para extranjeros", "pt": "Autorização de residência com vínculo empregatício no Brasil para estrangeiros"}'>Autorização de residência com vínculo empregatício no Brasil para estrangeiros</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed" data-lang='{"en": "is a temporary visa granted to foreign professionals hired by Brazilian companies. This visa allows the worker to live and work legally in Brazil, being renewable and potentially leading to permanent residency after meeting certain requirements.", "es": "es una visa temporal otorgada a profesionales extranjeros contratados por empresas brasileñas. Esta visa permite al trabajador vivir y trabajar legalmente en Brasil, siendo renovable y pudiendo llevar a la residencia permanente después de cumplir ciertos requisitos.", "pt": "é um visto temporário concedido a profissionais estrangeiros contratados por empresas brasileiras. Esse visto permite que o trabalhador more e atue legalmente no Brasil, sendo renovável e podendo levar à residência permanente após cumprir certos requisitos."}'> é um visto temporário concedido a profissionais estrangeiros contratados 
+                        por empresas brasileiras. Esse visto permite que 
+                        o trabalhador more e atue legalmente no Brasil, 
+                        sendo renovável e podendo levar à residência permanente após cumprir certos requisitos.</p>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 flex flex-col items-center text-center">
+                    <div class="flex items-center justify-center w-16 h-16 mb-6 rounded-full bg-soft-teal text-white shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" class="w-8 h-8">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3" data-lang='{"en": "Family Reunion Visa", "es": "Visa de Reunión Familiar", "pt": "Visto de reunião Familiar"}'>Visto de reunião Familiar</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed" data-lang='{"en": "The family reunion visa in Brazil allows family members of a Brazilian citizen or a foreigner with a residence permit to stay in the country. This visa aims to reunite families, allowing spouses, ascendants, descendants, and other close relatives to come and live in Brazil.", "es": "La visa de reunión familiar en Brasil permite que los familiares de un ciudadano brasileño o de un extranjero con autorización de residencia permanezcan en el país. Esta visa tiene como objetivo reunir a la familia, permitiendo que cónyuges, ascendientes, descendientes y otros parientes cercanos puedan venir a vivir en Brasil.", "pt": "O visto de reunião familiar no Brasil permite que familiares de um cidadão brasileiro ou de um estrangeiro com autorização de residência permaneçam no país. Este visto visa reunir a família, permitindo que cônjuges, ascendentes, descendentes e outros parentes próximos possam vir morar no Brasil."}'>O visto de reunião familiar no Brasil permite que familiares de um cidadão
+                         brasileiro ou de um estrangeiro com autorização de residência permaneçam no país. 
+                         <br>
+                        Este visto visa reunir a família, permitindo que cônjuges, ascendentes, descendentes e outros parentes próximos possam vir morar no Brasil.</p>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 flex flex-col items-center text-center">
+                    <div class="flex items-center justify-center w-16 h-16 mb-6 rounded-full bg-soft-teal text-white shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" class="w-8 h-8">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3" data-lang='{"en": "Permanent Residency for Investors", "es": "Residencia Permanente para Inversores", "pt": "Residência Permanente para Investidores"}'>Residência Permanente para Investidores</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed" data-lang='{"en": "is a permanent visa granted to foreigners who invest a significant amount in the Brazilian economy, such as through the purchase of real estate or the establishment of a business. This visa allows the investor and their family to live and work in Brazil indefinitely, provided they meet the investment requirements.", "es": "es una visa permanente otorgada a extranjeros que invierten una cantidad significativa en la economía brasileña, como a través de la compra de bienes raíces o el establecimiento de un negocio. Esta visa permite al inversionista y su familia vivir y trabajar en Brasil indefinidamente, siempre que cumplan con los requisitos de inversión.", "pt": "é um visto permanente concedido a estrangeiros que investem uma quantia significativa na economia brasileira, como por meio da compra de imóveis ou do estabelecimento de um negócio. Esse visto permite que o investidor e sua família morem e trabalhem no Brasil indefinidamente, desde que atendam aos requisitos de investimento."}'>é um visto permanente concedido a estrangeiros que investem uma quantia significativa na economia brasileira, 
+                        como por meio da compra de imóveis ou do estabelecimento de um negócio. Esse visto permite que o investidor e sua família morem e trabalhem no Brasil indefinidamente, 
+                        desde que atendam aos requisitos de investimento.</p>
+                </div>
+            </div>
+        </div>
+    </section>  
+    <section id="team" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center text-gray-700 mb-16" data-lang='{"en": "Meet Our Team of Specialists", "es": "Conozca a Nuestro Equipo de Especialistas", "pt": "Conheça Nossa Equipe de Especialistas"}'>Conheça Nossa Equipe de Especialistas</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-start">
+                <div class="bg-gray-50 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 flex flex-col md: items-center md:items-start space-y-6 md:space-y-0 md:space-x-8">
+                    <img src="./images/Daniela S Silva Morales.png" alt="Daniela S Silva Morales" class="w-40 h-40 md:w-48 md:h-48 rounded-full object-cover shadow-md border-4 border-soft-teal">
+                    <br>
+                    
+                    <div class="text-center md:text-left">
+                        <h3 class="text-2xl font-semibold text-soft-teal mb-2">Daniela S Silva Morales</h3>
+                        <p class="text-gray-600 leading-relaxed" data-lang='{"en": "Lawyer specializing in international and immigration law, with extensive experience in Golden Visa and citizenship processes. Dedicated to finding the best solutions for her clients.", "es": "Abogada especialista en derecho internacional e inmigración, con vasta experiencia en procesos de Visto Gold y ciudadanía. Dedicada a encontrar las mejores soluciones para sus clientes.", "pt": "Advogada especialista em direito internacional e imigração, com vasta experiência em processos de Visto Gold e cidadania. Dedicada a encontrar as melhores soluções para seus clientes."}'>Advogada especialista em direito internacional e imigração, com vasta experiência em processos de Visto Gold e cidadania. Dedicada a encontrar as melhores soluções para seus clientes.</p>
+                    </div>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 flex flex-col md: items-center md:items-start space-y-6 md:space-y-0 md:space-x-8">
+                    <img src="./images/Paula Dovizinski.png" alt="Paula Dovizinski" class="w-40 h-40 md:w-48 md:h-48 rounded-full object-cover shadow-md border-4 border-soft-teal">
+                    <br>
+                    
+                    <div class="text-center md:text-left">
+                        <h3 class="text-2xl font-semibold text-soft-teal mb-2">Paula Dovizinski</h3>
+                        <p class="text-gray-600 leading-relaxed" data-lang='{"en": "Lawyer and Real Estate Broker focused on migratory law and foreign investment with extensive experience in real estate law. Paula assists clients in all stages of the process of obtaining residency in Brazil.", "es": "Abogada y Corredora de Bienes Raíces enfocada en derecho migratorio e inversión extranjera con vasta experiencia en derecho inmobiliario. Paula asiste a los clientes en todas las etapas del proceso de obtención de residencia en Brasil.", "pt": "Advogada e Corretora de Imóveis focada em direito migratório e investimento estrangeiro com vasta experiência no direito imobiliário. Paula auxilia clientes em todas as etapas do processo de obtenção de residência no Brasil."}'>Advogada e Corretora de Imóveis focada em direito migratório 
+                            e investimento estrangeiro com vasta experiência no direito imobiliário. 
+                            Paula auxilia clientes em todas as etapas do processo de obtenção de residência no Brasil..</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+  <!-- <section id="contact" class="py-20 bg-soft-teal text-white">
+    <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-8" data-lang='{"en": "Contact Us", "es": "Contáctenos", "pt": "Entre em Contato Conosco"}'>Entre em Contato Conosco</h2>
+            <p class="text-xl text-center mb-12" data-lang='{"en": "Ready to take the next step towards your future in Brazil? Talk to us today!", "es": "Listo para dar el siguiente paso hacia su futuro en Brasil? ¡Hable con nosotros hoy mismo!", "pt": "Pronto para dar o próximo passo em direção ao seu futuro no Brasil? Fale conosco hoje mesmo!"}'>Pronto para dar o próximo passo em direção ao seu futuro no Brasil? Fale conosco hoje mesmo!</p>
+            
+            
+            <div class="text-center">
+                <a href="#" onclick="window.open('https://wa.me/5548999373821')"
+                class="bg-white text-soft-teal font-bold rounded-full py-4 px-10 text-xl hover:bg-gray-100 transition duration-300 inline-block transform hover:scale-105 shadow-lg"
+                data-lang='{"en": "Contact Us", "es": "Contáctenos", "pt": "Fale Conosco"}'>
+                Fale Conosco
+                </a>
+            </div>
+        </div>
+    </div>
+</section> -->
+
+     <!-- Blog Section -->
+    <section id="blog" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center text-gray-700 mb-16" data-lang='{"en": "Our Blog and Videos.", 
+                            "es": "Nuestro blog y vídeos", 
+                             "pt": "Nosso Blog e Vídeos"}'>Nosso Blog e Vídeos</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">              
+                
+                <!-- Video 1 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300">
+                    <div class="relative pb-[56.25%]">
+                        <iframe class="absolute top-0 left-0 w-full h-full" src="https://player.vimeo.com/video/1101633042?title=0&byline=0&portrait=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2" data-lang='{"en": "Reasons to invest in Brazil", 
+                            "es": "Razones para invertir en Brasil.", 
+                             "pt": "Motivos para investir no Brasil."}'>Motivos para investir no Brasil</h3>
+                        <p class="text-gray-600" data-lang='{"en": "Discover the benefits of obtaining a visa for Brazil and the advantages for investors.", 
+                            "es": "Descubra los beneficios de obtener una visa para Brasil y las ventajas para los inversores.", 
+                             "pt": "Descubra os benefícios de obter o visto para o Brasil e as vantagens para investidor."}'>Descubra os benefícios de obter o visto para o Brasil e as vantagens para investidor.</p>
+                    </div>
+                </div>
+                
+                <!-- Video 2 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300">
+                    <div class="relative pb-[56.25%]">
+                        <iframe class="absolute top-0 left-0 w-full h-full" src="https://player.vimeo.com/video/1101633073?title=0&byline=0&portrait=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2" data-lang='{"en": "Did you know that you can legally live in Brazil...", 
+                            "es": "¿Sabías que puedes vivir legalmente en Brasil...?", 
+                             "pt": "Você sabia que pode morar legalmente no Brasil..."}'>Você sabia que pode morar legalmente no Brasil...</h3>
+                        <p class="text-gray-600" data-lang='{"en": "How to live and legally live in Brazil by investing in real estate.", 
+                            "es": "Cómo vivir y residir legalmente en Brasil invirtiendo en bienes raíces.", 
+                             "pt": "Como morar e viver legalmente no Brasil investindo em imóveis"}'>Como morar e viver legalmente no Brasil investindo em imóveis.</p>
+                    </div>
+                </div>
+
+                <!-- Video 3 -->
+                 <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300">
+                    <div class="relative pb-[56.25%]">
+                        <iframe class="absolute top-0 left-0 w-full h-full" src="https://player.vimeo.com/video/1101501005?title=0&byline=0&portrait=0"
+                         frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                         allowfullscreen></iframe>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2" data-lang='{"en": "Florianópolis is the perfect place for you...", 
+                            "es": "Florianópolis es el lugar perfecto para ti...", 
+                             "pt": "Florianópolis é o lugar perfeito para você..."}'>Florianópolis é o lugar perfeito para você...</h3>
+                        <p class="text-gray-600" 
+                            data-lang='{"en": "Florianópolis is the perfect place for you to invest in Brazil. Here you will find quality of life, incredible nature, and much more... discover it!", 
+                            "es": "Florianópolis es el lugar perfecto para invertir en Brasil. Aquí encontrarás calidad de vida, naturaleza increíble y mucho más... ¡descúbrelo!", 
+                             "pt": "Florianópolis é o lugar perfeito para você investir no Brasil, aqui você encontra qualidade de vida, natureza incrível e muitos mais… descubra!"}'>
+                             Florianópolis é o lugar perfeito para você investir no Brasil, aqui você encontra qualidade de vida, natureza incrível e muitos mais… descubra!</p>
+                    </div>
+                </div> 
+
+                 <!-- Video 4 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300">
+                    <div class="relative pb-[56.25%]">
+                        <iframe class="absolute top-0 left-0 w-full h-full"  src="https://player.vimeo.com/video/1101500971?title=0&byline=0&portrait=0"
+                         frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2" data-lang='{"en": "Stay with us and we’ll tell you that the document...", 
+                            "es": "Quédate con nosotros y te contamos que el documento...", 
+                             "pt": "Fique com a gente que vamos te contar que o documento..."}'>Fique com a gente que vamos te contar que o documento...</h3>
+                        <p class="text-gray-600" data-lang='{"en": "The first document is a valid passport, required for the process. See and find out.", 
+                            "es": "El primer documento es un pasaporte válido, necesario para el trámite. Consulta y descubre.", 
+                             "pt": "O primeiro documento é o passaporte válido, para o processo. Veja e descubra "}'>O primeiro documento é o passaporte válido, para o processo. Veja e descubra </p>
+                    </div>
+                </div> 
+
+            </div>
+            
+            <!-- <div class="text-center mt-12">
+                <a href="#" class="inline-block bg-soft-teal text-white font-bold rounded-full py-3 px-8 text-lg hover:bg-teal-600 transition duration-300">Ver Mais Conteúdos</a>
+            </div> -->
+        
+                   
+        
+        </div>
+
+    </section>
+
+    <!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visto de Investidor Imobiliário no Brasil</title>
+    <script src="https://cdn.tailwindcss.com/3.4.10"></script>
+    <style>
+        /* Custom animation for fade-in effect */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans antialiased">
+    <section class="py-16 sm:py-24 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-3xl mx-auto">
+                <article class="space-y-8">
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-6 leading-tight animate-fade-in" data-lang='{"pt": "Visto de Investidor Imobiliário no Brasil: Como Funciona e Quais São as Vantagens?", "es": "Visa de Inversión Inmobiliaria en Brasil: ¿Cómo Funciona y Cuáles son sus Ventajas?", "en": "Real Estate Investor Visa in Brazil: How Does It Work and What Are the Benefits?"}'>
+                        Visto de Investidor Imobiliário no Brasil: Como Funciona e Quais São as Vantagens?
+                    </h1>
+                    
+                    <p class="text-base sm:text-lg text-gray-700 leading-relaxed animate-fade-in" data-lang='{"pt": "Nos últimos anos, o Brasil tem se consolidado como um destino atrativo para investidores estrangeiros, especialmente no setor imobiliário. Além do potencial de valorização dos imóveis, existe um benefício adicional que chama cada vez mais a atenção: o visto de investidor imobiliário.", "es": "En los últimos años, Brasil se ha consolidado como un destino atractivo para inversores extranjeros, especialmente en el sector inmobiliario. Además del potencial de valorización de las propiedades, existe un beneficio adicional que llama cada vez más la atención: la visa de inversión inmobiliaria.", "en": "In recent years, Brazil has established itself as an attractive destination for foreign investors, especially in the real estate sector. In addition to the property appreciation potential, there is an additional benefit that is drawing increasing attention: the real estate investor visa."}'>
+                        Nos últimos anos, o Brasil tem se consolidado como um destino atrativo para investidores estrangeiros, especialmente no setor imobiliário. Além do potencial de valorização dos imóveis, existe um benefício adicional que chama cada vez mais a atenção: o visto de investidor imobiliário.
+                    </p>
+                    
+                    <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mt-10 mb-4 animate-fade-in" data-lang='{"pt": "O Que é o Visto de Investidor Imobiliário?", "es": "¿Qué es la Visa de Inversión Inmobiliaria?", "en": "What is the Real Estate Investor Visa?"}'>
+                        O Que é o Visto de Investidor Imobiliário?
+                    </h2>
+                    <p class="text-base sm:text-lg text-gray-700 leading-relaxed animate-fade-in" data-lang='{"pt": "O visto de investidor imobiliário é uma modalidade de residência no Brasil destinada a estrangeiros que realizam investimentos em imóveis no país. Ele está regulamentado pela Resolução Normativa nº 36/2018 do Conselho Nacional de Imigração (CNIg) e faz parte da política brasileira de atrair recursos externos e fomentar o mercado imobiliário.", "es": "La visa de inversión inmobiliaria es una modalidad de residencia en Brasil destinada a extranjeros que realizan inversiones en propiedades en el país. Está regulada por la Resolución Normativa nº 36/2018 del Consejo Nacional de Inmigración (CNIg) y forma parte de la política brasileña para atraer recursos externos y fomentar el mercado inmobiliario.", "en": "The real estate investor visa is a residency modality in Brazil for foreigners who make real estate investments in the country. It is regulated by Normative Resolution No. 36/2018 of the National Immigration Council (CNIg) and is part of Brazil's policy to attract foreign resources and promote the real estate market."}'>
+                        O visto de investidor imobiliário é uma modalidade de residência no Brasil destinada a estrangeiros que realizam investimentos em imóveis no país. Ele está regulamentado pela Resolução Normativa nº 36/2018 do Conselho Nacional de Imigração (CNIg) e faz parte da política brasileira de atrair recursos externos e fomentar o mercado imobiliário.
+                    </p>
+                    
+                    <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mt-10 mb-4 animate-fade-in" data-lang='{"pt": "Valor Mínimo do Investimento", "es": "Valor Mínimo de Inversión", "en": "Minimum Investment Amount"}'>
+                        Valor Mínimo do Investimento
+                    </h2>
+                    <p class="text-base sm:text-lg text-gray-700 leading-relaxed animate-fade-in" data-lang='{"pt": "Atualmente, o investimento mínimo exigido é de R$ 1.000.000,00 (um milhão de reais) em imóveis urbanos localizados em território brasileiro. No entanto, há exceção para regiões norte e nordeste do País no qual o investimento mínimo pode ser reduzido para R$ 700.000,00 (setecentos mil reais).", "es": "Actualmente, la inversión mínima requerida es de R$ 1.000.000,00 (un millón de reales) en propiedades urbanas ubicadas en territorio brasileño. Sin embargo, hay una excepción para las regiones norte y noreste del país donde la inversión mínima puede reducirse a R$ 700.000,00 (setecientos mil reales).", "en": "Currently, the minimum required investment is R$1,000,000.00 (one million reais) in urban properties located in Brazilian territory. However, there is an exception for the northern and northeastern regions of the country where the minimum investment can be reduced to R$700,000.00 (seven hundred thousand reais)."}'>
+                        Atualmente, o investimento mínimo exigido é de R$ 1.000.000,00 (um milhão de reais) em imóveis urbanos localizados em território brasileiro. No entanto, há exceção para regiões norte e nordeste do País no qual o investimento mínimo pode ser reduzido para R$ 700.000,00 (setecentos mil reais).
+                    </p>
+                    
+                    <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mt-10 mb-4 animate-fade-in" data-lang='{"pt": "Tipos de Imóveis Permitidos", "es": "Tipos de Propiedades Permitidas", "en": "Allowed Property Types"}'>
+                        Tipos de Imóveis Permitidos
+                    </h2>
+                    <p class="text-base sm:text-lg text-gray-700 leading-relaxed animate-fade-in" data-lang='{"pt": "São aceitos imóveis residenciais ou comerciais, novos ou usados, desde que devidamente registrados no Registro de Imóveis competente. Ainda poderá ser imóvel em construção e/ou vendido na planta desde comprovada a expedição de Alvará de Construção nos termos da legislação brasileira e/ou Memorial de Incorporação devidamente registrado. O investimento pode ser feito em um único imóvel ou em mais de um, desde que a soma atinja o valor mínimo exigido.", "es": "Se aceptan propiedades residenciales o comerciales, nuevas o usadas, siempre que estén debidamente registradas en el Registro de Propiedades competente. También podrán ser propiedades en construcción y/o vendidas en planta, siempre que se compruebe la expedición del Permiso de Construcción según la legislación brasileña y/o el Memorial de Incorporación debidamente registrado. La inversión puede realizarse en una sola propiedad o en más de una, siempre que la suma alcance el valor mínimo requerido.", "en": "Residential or commercial properties, new or used, are accepted as long as they are properly registered with the competent Property Registry. Properties under construction and/or sold off-plan are also allowed, provided that the issuance of a Construction Permit under Brazilian law and/or a duly registered Incorporation Memorandum is proven. The investment can be made in a single property or in more than one, as long as the sum reaches the minimum required amount."}'>
+                        São aceitos imóveis residenciais ou comerciais, novos ou usados, desde que devidamente registrados no Registro de Imóveis competente. Ainda poderá ser imóvel em construção e/ou vendido na planta desde comprovada a expedição de Alvará de Construção nos termos da legislação brasileira e/ou Memorial de Incorporação devidamente registrado. O investimento pode ser feito em um único imóvel ou em mais de um, desde que a soma atinja o valor mínimo exigido.
+                    </p>
+                    
+                    <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mt-10 mb-4 animate-fade-in" data-lang='{"pt": "Quais os Benefícios do Visto?", "es": "¿Cuáles son los Beneficios de la Visa?", "en": "What Are the Visa Benefits?"}'>
+                        Quais os Benefícios do Visto?
+                    </h2>
+                    <ul class="list-disc pl-6 mb-6 text-base sm:text-lg text-gray-700 space-y-4 animate-fade-in">
+                        <li>
+                            <strong data-lang='{"pt": "Residência no Brasil:", "es": "Residencia en Brasil:", "en": "Residency in Brazil:"}'>Residência no Brasil:</strong>
+                            <span data-lang='{"pt": "O investidor recebe autorização de residência válida inicialmente por 2 anos renovável por mais 2 anos. Após esse período, poderá solicitar a residência por tempo indeterminado, desde que comprovado que o investimento continua ativo.", "es": "El inversor recibe una autorización de residencia válida inicialmente por 2 años, renovable por otros 2 años. Después de este período, podrá solicitar la residencia por tiempo indefinido, siempre que demuestre que la inversión sigue activa.", "en": "The investor receives a residence authorization valid initially for 2 years, renewable for another 2 years. After this period, they can apply for indefinite residency, provided they prove the investment remains active."}'>
+                                O investidor recebe autorização de residência válida inicialmente por 2 anos renovável por mais 2 anos. Após esse período, poderá solicitar a residência por tempo indeterminado, desde que comprovado que o investimento continua ativo.
+                            </span>
+                        </li>
+                        <li>
+                            <strong data-lang='{"pt": "Liberdade de mobilidade:", "es": "Libertad de movilidad:", "en": "Mobility freedom:"}'>Liberdade de mobilidade:</strong>
+                            <span data-lang='{"pt": "Possibilidade de entrar e sair do Brasil sem limitações impostas aos vistos de curta duração.", "es": "Posibilidad de entrar y salir de Brasil sin las limitaciones impuestas a los visados de corta duración.", "en": "Possibility to enter and leave Brazil without the limitations imposed on short-term visas."}'>
+                                Possibilidade de entrar e sair do Brasil sem limitações impostas aos vistos de curta duração.
+                            </span>
+                        </li>
+                        <li>
+                            <strong data-lang='{"pt": "Direito de trabalho e negócios:", "es": "Derecho a trabajar y hacer negocios:", "en": "Right to work and do business:"}'>Direito de trabalho e negócios:</strong>
+                            <span data-lang='{"pt": "O investidor pode trabalhar, abrir empresas ou gerir negócios no país.", "es": "El inversor puede trabajar, abrir empresas o gestionar negocios en el país.", "en": "The investor can work, open companies or manage businesses in the country."}'>
+                                O investidor pode trabalhar, abrir empresas ou gerir negócios no país.
+                            </span>
+                        </li>
+                        <li>
+                            <strong data-lang='{"pt": "Reagrupamento familiar:", "es": "Reagrupación familiar:", "en": "Family reunification:"}'>Reagrupamento familiar:</strong>
+                            <span data-lang='{"pt": "Permite incluir cônjuge, filhos e outros dependentes no pedido de residência.", "es": "Permite incluir cónyuge, hijos y otros dependientes en la solicitud de residencia.", "en": "Allows including spouse, children and other dependents in the residency application."}'>
+                                Permite incluir cônjuge, filhos e outros dependentes no pedido de residência.
+                            </span>
+                        </li>
+                    </ul>
+                    
+                    <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mt-10 mb-4 animate-fade-in" data-lang='{"pt": "Como Solicitar?", "es": "¿Cómo Solicitar?", "en": "How to Apply?"}'>
+                        Como Solicitar?
+                    </h2>
+                    <p class="text-base sm:text-lg text-gray-700 leading-relaxed animate-fade-in" data-lang='{"pt": "O processo envolve:", "es": "El proceso implica:", "en": "The process involves:"}'>
+                        O processo envolve:
+                    </p>
+                    <ul class="list-disc pl-6 mb-6 text-base sm:text-lg text-gray-700 space-y-4 animate-fade-in">
+                        <li data-lang='{"pt": "Comprovação do investimento (escrituras, matrícula no registros de imóveis, comprovantes de pagamento);", "es": "Comprobación de la inversión (escrituras, registro en el catastro, comprobantes de pago);", "en": "Proof of investment (deeds, property registry, payment receipts);"}'>
+                            Comprovação do investimento (escrituras, matrícula no registros de imóveis, comprovantes de pagamento);
+                        </li>
+                        <li data-lang='{"pt": "Documentação pessoal do investidor;", "es": "Documentación personal del inversor;", "en": "Investors personal documentation;"}'>
+                            Documentação pessoal do investidor;
+                        </li>
+                        <li data-lang='{"pt": "Pedido formal junto ao Ministério da Justiça e Segurança Pública ou às autoridades consulares brasileiras no exterior.", "es": "Solicitud formal ante el Ministerio de Justicia y Seguridad Pública o ante las autoridades consulares brasileñas en el exterior.", "en": "Formal application to the Ministry of Justice and Public Security or to Brazilian consular authorities abroad."}'>
+                            Pedido formal junto ao Ministério da Justiça e Segurança Pública ou às autoridades consulares brasileiras no exterior.
+                        </li>
+                    </ul>
+                    
+                    <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mt-10 mb-4 animate-fade-in" data-lang='{"pt": "Vale a Pena Investir?", "es": "¿Vale la Pena Invertir?", "en": "Is It Worth Investing?"}'>
+                        Vale a Pena Investir?
+                    </h2>
+                    <p class="text-base sm:text-lg text-gray-700 leading-relaxed animate-fade-in" data-lang='{"pt": "O Brasil oferece oportunidades únicas, especialmente em mercados imobiliários no Estado de Santa Catarina com destinos turísticos em alta, bem como alto índice de segurança e qualidade de vida. Com a valorização cambial favorável para investidores estrangeiros e o crescimento do mercado imobiliário, o visto de investidor imobiliário pode ser uma porta de entrada estratégica para morar e fazer negócios no país.", "es": "Brasil ofrece oportunidades únicas, especialmente en los mercados inmobiliarios del estado de Santa Catarina con destinos turísticos en alza, así como un alto índice de seguridad y calidad de vida. Con la valorización cambiaria favorable para inversores extranjeros y el crecimiento del mercado inmobiliario, la visa de inversión inmobiliaria puede ser una puerta de entrada estratégica para vivir y hacer negocios en el país.", "en": "Brazil offers unique opportunities, especially in real estate markets in the state of Santa Catarina with booming tourist destinations, as well as high safety and quality of life indexes. With favorable exchange rates for foreign investors and the growth of the real estate market, the real estate investor visa can be a strategic gateway to live and do business in the country."}'>
+                        O Brasil oferece oportunidades únicas, especialmente em mercados imobiliários no Estado de Santa Catarina com destinos turísticos em alta, bem como alto índice de segurança e qualidade de vida. Com a valorização cambial favorável para investidores estrangeiros e o crescimento do mercado imobiliário, o visto de investidor imobiliário pode ser uma porta de entrada estratégica para morar e fazer negócios no país.
+                    </p>
+                    
+                    <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mt-10 mb-4 animate-fade-in" data-lang='{"pt": "Conclusão", "es": "Conclusión", "en": "Conclusion"}'>
+                        Conclusão
+                    </h2>
+                    <p class="text-base sm:text-lg text-gray-700 leading-relaxed animate-fade-in" data-lang='{"pt": "O visto de investidor imobiliário no Brasil une o potencial de retorno financeiro à oportunidade de viver em um país rico em cultura, diversidade e belezas naturais. Para quem deseja diversificar investimentos e conquistar novos horizontes, esta pode ser uma excelente opção.", "es": "La visa de inversión inmobiliaria en Brasil combina el potencial de retorno financiero con la oportunidad de vivir en un país rico en cultura, diversidad y bellezas naturales. Para quienes desean diversificar inversiones y conquistar nuevos horizontes, esta puede be una excelente opción.", "en": "The real estate investor visa in Brazil combines the potential for financial returns with the opportunity to live in a country rich in culture, diversity and natural beauty. For those looking to diversify investments and conquer new horizons, this can be an excellent option."}'>
+                        O visto de investidor imobiliário no Brasil une o potencial de retorno financeiro à oportunidade de viver em um país rico em cultura, diversidade e belezas naturais. Para quem deseja diversificar investimentos e conquistar novos horizontes, esta pode ser uma excelente opção.
+                    </p>
+                    
+                    <div class="mt-12 bg-teal-50 p-6 sm:p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 animate-fade-in">
+                        <p class="text-base sm:text-lg text-gray-700 mb-6 leading-relaxed" data-lang='{"pt": "Se você está pensando em investir no mercado imobiliário brasileiro e deseja saber mais sobre o processo de obtenção do visto, entre em contato com nossa equipe especializada. Estamos prontos para ajudar em todas as etapas!", "es": "Si está pensando en invertir en el mercado inmobiliario brasileño y desea saber más sobre el proceso de obtención de la visa, contacte a nuestro equipo especializado. ¡Estamos listos para ayudar en todas las etapas!", "en": "If you're considering investing in the Brazilian real estate market and want to know more about the visa application process, contact our specialized team. We're ready to assist you through all steps!"}'>
+                            Se você está pensando em investir no mercado imobiliário brasileiro e deseja saber mais sobre o processo de obtenção do visto, entre em contato com nossa equipe especializada. Estamos prontos para ajudar em todas as etapas!
+                        </p>
+                        
+                        <div class="flex items-center mt-8">
+                            <div class="flex-shrink-0 mr-4">
+                                <img 
+                                    src="./images/paula-footer-5.png" 
+                                    alt="Paula Dovizinski"
+                                    class="w-16 h-16 rounded-full object-cover border-2 border-teal-300 hover:border-teal-400 transition-colors duration-300"
+                                    width="64"
+                                    height="64"
+                                    loading="lazy"
+                                >
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg text-gray-900">Paula Dovizinski</h3>
+                                <p class="text-gray-600 text-base" data-lang='{"pt": "Advogada e Corretora de Imóveis", "es": "Abogada y Corredora de Bienes Raíces", "en": "Lawyer and Real Estate Broker"}'>
+                                    Advogada e Corretora de Imóveis
+                                </p>
+                                <p class="text-sm text-gray-500" data-lang='{"pt": "Especialista em direito migratório e investimento estrangeiro", "es": "Especialista en derecho migratorio e inversión extranjera", "en": "Specialist in immigration law and foreign investment"}'>
+                                    Especialista em direito migratório e investimento estrangeiro
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
+ 
+     
+    <section id="contact" class="py-20 bg-soft-teal text-white">
+    <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-8" data-lang='{"en": "Contact Us", "es": "Contáctenos", "pt": "Entre em Contato Conosco"}'>Entre em Contato Conosco</h2>
+            <p class="text-xl text-center mb-12" data-lang='{"en": "Ready to take the next step towards your future in Brazil? Talk to us today!", "es": "¿Listo para dar el siguiente paso hacia su futuro en Brasil? ¡Hable con nosotros hoy mismo!", "pt": "Pronto para dar o próximo passo em direção ao seu futuro no Brasil? Fale conosco hoje mesmo!"}'>Pronto para dar o próximo passo em direção ao seu futuro no Brasil? Fale conosco hoje mesmo!</p>
+            
+            <form id="contactForm" class="bg-white rounded-xl shadow-lg p-8 text-gray-800">
+                <div class="mb-6" >
+                    <div>
+                        <label for="name" class="block text-gray-700 font-medium mb-2" data-lang='{"en": "Full Name*", "es": "Nombre Completo*", "pt": "Nome*"}'>Nome*</label>
+                        <input type="text" id="name" name="name" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-soft-teal focus:border-transparent" required>
+                    </div>
+                    
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label for="email" class="block text-gray-700 font-medium mb-2" data-lang='{"en": "E-mail*", "es": "Correo Electrónico*", "pt": "Email*"}'>Email*</label>
+                        <input type="email" id="email" name="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-soft-teal focus:border-transparent" required>
+                    </div>
+
+                    
+                    <div class="mb-6">
+                <label class="block text-gray-700 font-medium mb-2" data-lang='{"en": "Phone*", "es": "Teléfono*", "pt": "Telefone*"}'>Telefone*</label>
+                <div class="flex">
+                    <div class="w-20 mr-2">
+                        <input 
+                            type="text" 
+                             placeholder="+00"
+                            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-soft-teal focus:border-transparent" 
+                            
+                        >
+                    </div>
+                    <div class="flex-1">
+                        <input 
+                            type="tel" 
+                            id="phone" 
+                            name="phone" 
+                            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-soft-teal focus:border-transparent" 
+                            placeholder="(00) 00000-0000"                             
+                            required >
+                    </div>
+                </div>
+            </div>
+                </div>
+                
+                <div class="mb-6">
+                    <label class="block text-gray-700 font-medium mb-2" data-lang='{"en": "What is your main goal with life in Brazil?*", "es": "¿Cuál es su objetivo principal con la vida en Brasil?*", "pt": "Qual é o seu objetivo principal com a vida no Brasil?*"}'>Qual é o seu objetivo principal com a vida no Brasil?*</label>
+                    <div class="space-y-2">
+                        <div class="flex items-center">
+                            <input type="radio" id="goal1" name="goal" value="Obter residência ou visto" class="w-4 h-4 text-soft-teal focus:ring-soft-teal border-gray-300">
+                            <label for="goal1" class="ml-2" data-lang='{"en": "Obtain residency or visa (investor, work, retirement...)", "es": "Obtener residencia o visa (inversor, trabajo, jubilación...)", "pt": "Obter residência ou visto (investidor, trabalho, aposentadoria...)"}'>Obter residência ou visto (investidor, trabalho, aposentadoria...)</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="radio" id="goal2" name="goal" value="Comprar imóvel para morar" class="w-4 h-4 text-soft-teal focus:ring-soft-teal border-gray-300">
+                            <label for="goal2" class="ml-2" data-lang='{"en": "Buy property to live in", "es": "Comprar propiedad para vivir", "pt": "Comprar imóvel para morar"}'>Comprar imóvel para morar</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="radio" id="goal3" name="goal" value="Investir imóveis sem residir" class="w-4 h-4 text-soft-teal focus:ring-soft-teal border-gray-300">
+                            <label for="goal3" class="ml-2" data-lang='{"en": "Invest in real estate without residing", "es": "Invertir en bienes raíces sin residir", "pt": "Investir imóveis sem residir"}'>Investir imóveis sem residir</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="radio" id="goal4" name="goal" value="Intercâmbio/estudos" class="w-4 h-4 text-soft-teal focus:ring-soft-teal border-gray-300">
+                            <label for="goal4" class="ml-2" data-lang='{"en": "Exchange program/studies", "es": "Intercambio/estudios", "pt": "Intercâmbio/estudos"}'>Intercâmbio/estudos</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="radio" id="goal5" name="goal" value="Outro" class="w-4 h-4 text-soft-teal focus:ring-soft-teal border-gray-300">
+                            <label for="goal5" class="ml-2" data-lang='{"en": "Other (open field):", "es": "Otro (campo abierto):", "pt": "Outro (campo aberto):"}'>Outro (campo aberto):</label>
+                            <input type="text" id="goal_other" name="goal_other" class="ml-2 px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-soft-teal" placeholder="Especifique" data-lang-placeholder='{"en": "Specify", "es": "Especifique", "pt": "Especifique"}'>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <label class="block text-gray-700 font-medium mb-2" data-lang='{"en": "How much do you plan to invest in real estate in Brazil?", "es": "¿Cuánto planea invertir en bienes raíces en Brasil?", "pt": "Qual o valor que você planeja investir em imóveis no Brasil?"}'>Qual o valor que você planeja investir em imóveis no Brasil?</label>
+                    <div class="space-y-2">
+                        <div class="flex items-center">
+                            <input type="radio" id="investment1" name="investment" value="Até R$1 M" class="w-4 h-4 text-soft-teal focus:ring-soft-teal border-gray-300">
+                            <label for="investment1" class="ml-2" data-lang='{"en": "Up to R$1M", "es": "Hasta R$1M", "pt": "Até R$1 M"}'>Até R$1 M</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="radio" id="investment2" name="investment" value="R$1 M a R$3 M" class="w-4 h-4 text-soft-teal focus:ring-soft-teal border-gray-300">
+                            <label for="investment2" class="ml-2" data-lang='{"en": "R$1M to R$3M", "es": "R$1M a R$3M", "pt": "R$1 M a R$3 M"}'>R$1 M a R$3 M</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="radio" id="investment3" name="investment" value="Acima de R$3 ml" class="w-4 h-4 text-soft-teal focus:ring-soft-teal border-gray-300">
+                            <label for="investment3" class="ml-2" data-lang='{"en": "Above R$3M", "es": "Más de R$3M", "pt": "Acima de R$3 M"}'>Acima de R$3 M</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="radio" id="investment4" name="investment" value="Ainda definindo" class="w-4 h-4 text-soft-teal focus:ring-soft-teal border-gray-300">
+                            <label for="investment4" class="ml-2" data-lang='{"en": "Still deciding", "es": "Aún decidiendo", "pt": "Ainda definindo"}'>Ainda definindo</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <label class="block text-gray-700 font-medium mb-2" data-lang='{"en": "In what timeframe do you intend to close a deal in Brazil?", "es": "¿En qué plazo pretende cerrar un negocio en Brasil?", "pt": "Em que prazo pretende fechar um negócio no Brasil?"}'>Em que prazo pretende fechar um negócio no Brasil?</label>
+                    <div class="space-y-2">
+                        <div class="flex items-center">
+                            <input type="radio" id="timeline1" name="timeline" value="Nos próximos 3 meses" class="w-4 h-4 text-soft-teal focus:ring-soft-teal border-gray-300">
+                            <label for="timeline1" class="ml-2" data-lang='{"en": "In the next 3 months", "es": "En los próximos 3 meses", "pt": "Nos próximos 3 meses"}'>Nos próximos 3 meses</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="radio" id="timeline2" name="timeline" value="Dentro de 6 meses" class="w-4 h-4 text-soft-teal focus:ring-soft-teal border-gray-300">
+                            <label for="timeline2" class="ml-2" data-lang='{"en": "Within 6 months", "es": "Dentro de 6 meses", "pt": "Dentro de 6 meses"}'>Dentro de 6 meses</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="radio" id="timeline3" name="timeline" value="Entre 6 e 12 meses" class="w-4 h-4 text-soft-teal focus:ring-soft-teal border-gray-300">
+                            <label for="timeline3" class="ml-2" data-lang='{"en": "Between 6 and 12 months", "es": "Entre 6 y 12 meses", "pt": "Entre 6 e 12 meses"}'>Entre 6 e 12 meses</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="radio" id="timeline4" name="timeline" value="Somente início de avaliação" class="w-4 h-4 text-soft-teal focus:ring-soft-teal border-gray-300">
+                            <label for="timeline4" class="ml-2" data-lang='{"en": "Just starting evaluation", "es": "Solo inicio de evaluación", "pt": "Somente início de avaliação"}'>Somente início de avaliação</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex items-center mb-6">
+                    <input type="checkbox" id="consent" name="consent" class="w-4 h-4 text-soft-teal rounded focus:ring-soft-teal border-gray-300" required>
+                    <label for="consent" class="ml-2 text-gray-700" data-lang='{"en": "I agree with the privacy policy and data processing", "es": "Acepto la política de privacidad y el tratamiento de datos", "pt": "Concordo com a política de privacidade e tratamento de dados"}'>Concordo com a política de privacidade e tratamento de dados</label>
+                </div>
+                
+                <button type="submit" class="w-full bg-soft-teal text-white font-bold py-4 px-6 rounded-lg hover:bg-teal-600 transition duration-300" data-lang='{"en": "Send Message", "es": "Enviar Mensaje", "pt": "Enviar Mensagem"}'>Enviar Mensagem</button>
+            </form>
+        </div>
+    </div>
+</section>
+   
+
+    <div class="modern-float-container">
+        <div class="modern-float-btn whatsapp-btn" onclick="window.open('https://wa.me/5548999373821')">
+            <div class="wave"></div>
+            <div class="icon-container">
+                <svg class="icon" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23-1.48 0-2.93-.39-4.19-1.15l-.3-.17-3.12.82.83-3.04-.2-.32a8.188 8.188 0 0 1-1.26-4.38c.01-4.54 3.7-8.24 8.25-8.24M8.53 7.33c-.16 0-.43.06-.66.31-.22.25-.87.86-.87 2.07 0 1.22.89 2.39 1 2.56.14.17 1.76 2.67 4.25 3.73.59.27 1.05.42 1.41.53.59.19 1.13.16 1.56.1.48-.07 1.46-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.07-.1-.23-.16-.48-.27-.25-.14-1.47-.74-1.69-.82-.23-.08-.37-.12-.56.12-.16.25-.64.81-.78.97-.15.17-.29.19-.53.07-.26-.13-1.06-.39-2-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43s.17-.25.25-.41c.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.4-.42-.56-.43-.14 0-.3-.01-.47-.01z"/>
+                </svg>
+            </div>
+            <span class="tooltip" data-lang='{"en": "Send a message", "es": "Enviar un mensaje", "pt": "Envie uma mensagem"}'>Envie uma mensagem</span>
+        </div>
+        
+         <div class="modern-float-btn telegram-btn" onclick="window.open('https://t.me/5548999373821')">
+              <div class="wave"></div>
+              <div class="icon-container">
+                <svg class="icon" viewBox="0 0 24 24">
+                  <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.03-.07.06-.33-.12-.46-.18-.14-.43-.1-.62-.06-.26.07-4.45 2.79-6.28 3.87-.59.35-1.13.53-1.62.52-.53-.02-1.54-.3-2.3-.55-.92-.3-1.66-.46-1.59-.97.03-.27.4-.55 1.1-.85 4.48-1.74 8.06-3.23 10.87-4.37 1.56-.63 2.99-.96 3.6-.73.9.34.59 1.67.16 3.15z"/>
+                </svg>
+              </div>
+              <span class="tooltip" data-lang='{"en": "Talk on Telegram", "es": "Hablar en Telegram", "pt": "Fale no Telegram"}'>Fale no Telegram</span>
+            </div>
+
+            <div id="aboutModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">×</span>
+            <h3 class="text-2xl font-bold text-soft-teal mb-4" data-lang='{"en": "Who We Are", "es": "Quiénes Somos", "pt": "Quem Somos"}'>Quem Somos</h3>
+            <p class="text-gray-700 leading-relaxed" data-lang='{"en": "<b>VisaInvest</b> is a company specializing in international mobility and citizenship solutions. We operate on two fronts: we assist foreigners who wish to live legally in Brazil, offering complete support for obtaining visas and migratory regularization; and we help Brazilians in recognizing their Portuguese, Italian, Spanish, and German citizenships.", "es": "<b>VisaInvest</b> es una empresa especializada en soluciones de movilidad internacional y ciudadanía. Operamos en dos frentes: asistimos a extranjeros que desean vivir legalmente en Brasil, ofreciendo soporte completo para la obtención de visas y regularización migratoria; y ayudamos a los brasileños en el reconocimiento de sus ciudadanías Portuguesa, Italiana, Española y Alemana.", "pt": "A <b>VisaInvest</b> é uma empresa especializada em soluções de mobilidade internacional e cidadania. Atuamos em duas frentes: assessoramos estrangeiros que desejam viver legalmente no Brasil, oferecendo suporte completo para obtenção de vistos e regularização migratória; e auxiliamos brasileiros no reconhecimento de suas cidadanias Portuguesa, Italiana, Espanhola e Alemã."}'>
+            A <b>VisaInvest</b> é uma empresa especializada em soluções de mobilidade 
+            internacional e cidadania. 
+            <br>
+            Atuamos em duas frentes: 
+            assessoramos estrangeiros que desejam viver legalmente no Brasil,
+            oferecendo suporte completo para obtenção de vistos e regularização migratória; 
+            <br>
+            e auxiliamos brasileiros no reconhecimento de suas cidadanias Portuguesa, Italiana, Espanhola e Alemã.
+            </p>
+        </div>
+        </div>
+    </div>    
+     <footer class="bg-gray-800 text-white py-10">
+    <div class="container mx-auto px-6 text-center">
+        <div class="mb-4">
+            <a href="https://www.instagram.com/visainvestbrazil/" target="_blank" rel="noopener noreferrer" class="inline-block mx-2 hover:text-pink-500 transition-colors">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd"></path>
+                </svg>
+            </a>
+        </div>
+        <p class="mb-2" data-lang='{"en": "© <script>document.write(new Date().getFullYear())</script> VisaInvest Brazil. All rights reserved.", "es": "© <script>document.write(new Date().getFullYear())</script> VisaInvest Brazil. Todos los derechos reservados.", "pt": "© <script>document.write(new Date().getFullYear())</script> VisaInvest Brazil. Todos os direitos reservados."}'>© <script>document.write(new Date().getFullYear())</script> VisaInvest Brazil. Todos os direitos reservados.</p>
+        <p class="text-sm text-gray-400">CNPJ: 60.807.614/0001-01</p>
+        <p class="text-sm text-gray-400 mt-2">Powered by <a href="https://wisecrypto.digital" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400 transition-colors">WiseCrypto</a></p>
+    </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/inputmask@5.0.6/dist/inputmask.min.js"></script>
+<script>
+ 
+    
+    // Alternative vanilla JS solution if you prefer not to use Inputmask
+    /*
+    const phoneInput = document.getElementById('phone');
+    phoneInput.addEventListener('input', function(e) {
+        const value = e.target.value.replace(/\D/g, '');
+        let formattedValue = '';
+        
+        if (value.length > 0) {
+            formattedValue = '(' + value.substring(0, 2);
+        }
+        if (value.length > 2) {
+            formattedValue += ') ' + value.substring(2, 7);
+        }
+        if (value.length > 7) {
+            formattedValue += '-' + value.substring(7, 11);
+        }
+        
+        e.target.value = formattedValue;
+    });
+    */
+
+//     function changeLanguage(event, lang) {
+//     // Apenas para garantir que o evento não cause navegação indesejada se for um link
+//     if (event && typeof event.preventDefault === 'function') {
+//         event.preventDefault();
+//     }
+//     console.log(`Tentando mudar para o idioma: ${lang}`);
+
+//     console.log(`Tentando mudar para o event: ${event.preventDefault()}`);
+
+//     const desktopFlag = document.getElementById('desktop-flag');
+//     const desktopLangText = document.getElementById('desktop-lang-text');
+
+//     // Language configuration object
+//     const languages = {
+//         'en': {
+//             flag: 'https://flagcdn.com/w20/us.png',
+//             code: 'EN',
+//             name: 'English'
+//         },
+//         'es': {
+//             flag: 'https://flagcdn.com/w20/es.png',
+//             code: 'ES',
+//             name: 'Español'
+//         },
+//         'pt': {
+//             flag: 'https://flagcdn.com/w20/br.png',
+//             code: 'PT',
+//             name: 'Português'
+//         }
+//     };
+
+//     // Get selected language or default to English
+//     const selectedLangData =  languages['en'] || languages['es'] || languages['pt']; // Garante que temos os dados do idioma 'en', 'es', 'pt'
+//     const selectedLangCode =  'en' || 'es' || 'pt'; // Garante que temos o código 'en', 'es', 'pt'
+//     console.log(`Dados do idioma selectedLangCode:`, selectedLangCode);
+
+//     // Update UI for flag and language code display
+//     if (desktopFlag) {
+//         desktopFlag.src = selectedLangData.flag;
+//         desktopFlag.alt = selectedLangData.name;
+//     }
+//     if (desktopLangText) {
+//         desktopLangText.textContent = selectedLangData.code;
+//     }
+
+//     // --- NOVO CÓDIGO PARA ATUALIZAR O CONTEÚDO BASEADO EM data-lang ---
+//     document.querySelectorAll('[data-lang]').forEach(element => {
+//         try {
+//             const translations = JSON.parse(element.dataset.lang);
+//             if (translations[selectedLangCode]) {
+//                 // Use innerHTML para permitir tags HTML como <b>
+//                 element.innerHTML = translations[selectedLangCode];
+//             }
+//         } catch (e) {
+//             console.error('Erro ao fazer parse do JSON em data-lang ou ao traduzir:', element, e);
+//         }
+//     });
+//     // --- FIM DO NOVO CÓDIGO ---
+
+//     console.log(`Idioma alterado para: ${selectedLangData.name} (${selectedLangCode})`);
+//     localStorage.setItem('userLanguage', selectedLangCode);
+// }
+
+// // Set initial language on page load
+// document.addEventListener('DOMContentLoaded', () => {
+//     const supportedLanguages = ['en', 'es', 'pt'];
+//     const storedLanguage = localStorage.getItem('userLanguage');
+
+//     // Determine initial language (default to English)
+//     let initialLang = 'en';
+
+//     // Check stored language first
+//     if (storedLanguage && supportedLanguages.includes(storedLanguage)) {
+//         initialLang = storedLanguage;
+//     }
+//     // Then check browser language
+//     else {
+//         const browserLang = navigator.language.split('-')[0];
+//         if (supportedLanguages.includes(browserLang)) {
+//             initialLang = browserLang;
+//         }
+//     }
+
+//     // Trigger the language change (without event, passing a dummy event object)
+//     changeLanguage({ preventDefault: () => {} }, initialLang);
+// });
+    
+
+// Text animation for hero section
+    
+        document.addEventListener('DOMContentLoaded', function() {
+
+            
+            const heroText = document.getElementById('hero-text');
+            heroText.style.opacity = '0';
+            heroText.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                heroText.style.transition = 'opacity 1s ease, transform 1s ease';
+                heroText.style.opacity = '1';
+                heroText.style.transform = 'translateY(0)';
+            }, 300);
+        });
+
+        // Text animation for hero describe section more
+        document.addEventListener('DOMContentLoaded', function() {
+            const heroText = document.getElementById('hero-describe');
+            heroText.style.opacity = '0';
+            heroText.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                heroText.style.transition = 'opacity 1s ease, transform 1s ease';
+                heroText.style.opacity = '1';
+                heroText.style.transform = 'translateY(0)';
+            }, 300);
+        });
+
+          document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.hero-carousel .relative > div');
+            let currentSlide = 0;
+            
+            function nextSlide() {
+                slides[currentSlide].classList.remove('opacity-100');
+                slides[currentSlide].classList.add('opacity-0');
+                
+                currentSlide = (currentSlide + 1) % slides.length;
+                
+                slides[currentSlide].classList.remove('opacity-0');
+                slides[currentSlide].classList.add('opacity-100');
+            }
+            
+            // Change slide every 5 seconds
+            setInterval(nextSlide, 5000);
+        });
+ function changeLanguage(event, lang) {
+    //event.preventDefault();
+    //console.log(`event.preventDefault(): ${event.preventDefault()}`);
+     if (event && typeof event.preventDefault === 'function') {
+         event.preventDefault();
+   }
+    console.log(`event: ${event}`);
+    
+    const desktopFlag = document.getElementById('desktop-flag');
+    const desktopLangText = document.getElementById('desktop-lang-text');
+
+    // Language configuration object
+    const languages = {
+        'en': {
+            flag: 'https://flagcdn.com/w20/us.png',
+            code: 'EN',
+            name: 'English'
+        },
+        'es': {
+            flag: 'https://flagcdn.com/w20/es.png',
+            code: 'ES',
+            name: 'Español'
+        },
+        'pt': {
+            flag: 'https://flagcdn.com/w20/br.png',
+            code: 'PT',
+            name: 'Português'
+        }
+    };
+
+    // Get selected language or default to English
+    const selectedLang = languages[lang] || languages['en'];
+    //Get selected language or default to English
+    const selectedLangData =  languages['en'] || languages['es'] || languages['pt']; // Garante que temos os dados do idioma 'en', 'es', 'pt'
+    const selectedLangCode =  'en' || 'es' || 'pt'; // Garante que temos o código 'en', 'es', 'pt'
+    console.log(`Dados do idioma selectedLangCode:`, selectedLangCode);
+     console.log(`Dados do idioma selectedLang:`, selectedLang);
+
+    // Update UI
+    // desktopFlag.src = selectedLangData.flag;
+    // desktopFlag.alt = selectedLangData.name;
+    // desktopLangText.textContent = selectedLangData.code;
+    //     // Update UI for flag and language code display
+    if (desktopFlag) {
+        desktopFlag.src = selectedLang.flag;
+        desktopFlag.alt = selectedLang.name;
+    }
+    if (desktopLangText) {
+        desktopLangText.textContent = selectedLang.code;
+    }
+
+//     // --- NOVO CÓDIGO PARA ATUALIZAR O CONTEÚDO BASEADO EM data-lang ---
+    document.querySelectorAll('[data-lang]').forEach(element => {
+        try {
+            const translations = JSON.parse(element.dataset.lang);
+            //adiocnar o lang Fabiano
+            if (translations[lang]) {
+                // Use innerHTML para permitir tags HTML como <b>
+                element.innerHTML = translations[lang];
+            }
+        } catch (e) {
+            console.error('Erro ao fazer parse do JSON em data-lang ou ao traduzir:', element, e);
+        }
+    });
+//     // --- FIM DO NOVO CÓDIGO ---
+
+    console.log(`Language changed to: ${selectedLang.name} (${selectedLang.code}) (${lang})`);
+    localStorage.setItem('userLanguage', lang);
+}
+
+// Set initial language on page load
+document.addEventListener('DOMContentLoaded', () => {
+    const supportedLanguages = ['en', 'es', 'pt'];
+    const storedLanguage = localStorage.getItem('userLanguage');
+    
+    // Determine initial language (default to English)
+    let initialLang = 'en';
+    
+    // Check stored language first
+    if (storedLanguage && supportedLanguages.includes(storedLanguage)) {
+        initialLang = storedLanguage;
+    } 
+    // Then check browser language
+    else {
+        const browserLang = navigator.language.split('-')[0];
+        if (supportedLanguages.includes(browserLang)) {
+            initialLang = browserLang;
+        }
+    }
+
+    // Trigger the language change (without event)
+    changeLanguage({ preventDefault: () => {} }, initialLang);
+});
+
+// Modal functionality (assuming you already have this)
+function openAboutModal() {
+    document.getElementById('aboutModal').style.display = 'block';
+}
+
+document.querySelector('.close-modal').onclick = function() {
+    document.getElementById('aboutModal').style.display = 'none';
+}
+
+window.onclick = function(event) {
+    const modal = document.getElementById('aboutModal');
+    if (event.target == modal) {
+        modal.style.display = 'none';
+    }
+}
+
+// Mobile menu toggle functionality (assuming you already have this)
+function toggleMenu() {
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenu.classList.toggle('hidden');
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('contactForm');
+    const successModal = document.getElementById('successModal');
+    const closeModal = document.getElementById('closeModal');
+    
+    // Fechar modal quando clicar no botão OK
+    closeModal.addEventListener('click', function() {
+        successModal.classList.add('hidden');
+    });
+    
+    // Fechar modal quando clicar fora do conteúdo
+    successModal.addEventListener('click', function(e) {
+        if (e.target === successModal) {
+            successModal.classList.add('hidden');
+        }
+    });
+    
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const submitButton = form.querySelector('button[type="submit"]');
+        const originalButtonText = submitButton.innerHTML;
+        
+        // Mostrar loading no botão
+        submitButton.disabled = true;
+        submitButton.innerHTML = `
+            <svg class="animate-spin -ml-1 mr-2 h-5 w-5 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            <span data-lang='{"en": "Sending...", "es": "Enviando...", "pt": "Enviando..."}'>Enviando...</span>
+        `;
+          // Create FormData object
+        const formData = new FormData(form);
+        
+        // Convert FormData to URL-encoded string
+        const urlEncodedData = new URLSearchParams();
+        for (const pair of formData) {
+            urlEncodedData.append(pair[0], pair[1]);
+        }
+        
+
+        fetch('https://formsubmit.co/ajax/contato@visainvestbrazil.com', {
+            method: 'POST',
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Accept': 'application/json'
+            },
+            body: urlEncodedData.toString()
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                showSuccessModal();
+                form.reset();
+            } else {
+                alert('Error: ' + (data.message || 'Failed to send message'));
+            }
+        })
+        .catch(error => {
+            alert('Error: ' + error.message);
+        })
+        .finally(() => {
+            submitButton.disabled = false;
+            submitButton.innerHTML = originalButtonText;
+        });
+        // Simular envio (substitua por sua lógica real de envio)
+        //setTimeout(function() {
+            // Aqui você faria a requisição AJAX para seu backend
+            // Exemplo com fetch:
+            /*
+            const formData = new FormData(form);
+            
+            fetch('seu-endpoint-api', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showSuccessModal();
+                    form.reset();
+                } else {
+                    alert('Error: ' + (data.message || 'Failed to send message'));
+                }
+            })
+            .catch(error => {
+                alert('Error: ' + error.message);
+            })
+            .finally(() => {
+                submitButton.disabled = false;
+                submitButton.innerHTML = originalButtonText;
+            });
+            */
+            
+            // Para demonstração, estamos simulando um envio bem-sucedido
+          //  showSuccessModal();
+          //  form.reset();
+         //   submitButton.disabled = false;
+         //   submitButton.innerHTML = originalButtonText;
+        //}, 1500);
+    });
+    
+    function showSuccessModal() {
+        successModal.classList.remove('hidden');
+        // Fechar automaticamente após 5 segundos
+        setTimeout(() => {
+            if (!successModal.classList.contains('hidden')) {
+                successModal.classList.add('hidden');
+            }
+        }, 5000);
+    }
+});
+</script>
+
+
+</script>
+<!-- Adicione este modal no final do seu body, antes do </body> -->
+<div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-xl p-8 max-w-md w-full mx-4">
+        <div class="text-center">
+            <svg class="mx-auto h-16 w-16 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <h3 class="text-2xl font-bold text-gray-800 mt-4" data-lang='{"en": "Message sent successfully!", "es": "¡Mensaje enviado con éxito!", "pt": "Mensagem enviada com sucesso!"}'>Mensagem enviada com sucesso!</h3>
+            <p class="text-gray-600 mt-2" data-lang='{"en": "We will contact you soon. Thank you!", "es": "Nos pondremos en contacto pronto. ¡Gracias!", "pt": "Entraremos em contato em breve. Obrigado!"}'>Entraremos em contato em breve. Obrigado!</p>
+            <button id="closeModal" class="mt-6 bg-soft-teal text-white font-bold py-2 px-6 rounded-lg hover:bg-teal-600 transition duration-300">
+                OK
+            </button>
+        </div>
+    </div>
+</div>
+</body>
+</html>        
