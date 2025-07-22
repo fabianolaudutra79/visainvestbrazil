@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html >
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -783,7 +783,7 @@
     </section>
 
     <!DOCTYPE html>
-<html lang="pt">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -1203,7 +1203,7 @@
     };
 
     // Get selected language or default to English
-    const selectedLang = languages[lang] || languages['en'];
+    const selectedLang = languages[lang] || languages['pt'];
     //Get selected language or default to English
     const selectedLangData =  languages['en'] || languages['es'] || languages['pt']; // Garante que temos os dados do idioma 'en', 'es', 'pt'
     const selectedLangCode =  'en' || 'es' || 'pt'; // Garante que temos o código 'en', 'es', 'pt'
@@ -1244,38 +1244,43 @@
     const button = document.getElementById('saiba-mais-btn');
     const langShow = JSON.parse(button.getAttribute('data-lang-show'));
     const currentLang = lang;//document.documentElement.lang || 'pt';
-    const langCode = lang;//currentLang.substring(0, 2);
+    const langCode = lang;//currentLang.substring(0, 2);    
     
-    
-    console.log('langShow[langCode] =' + langShow[langCode]);
+    console.log('langShow[langCode] 1=' + langShow[langCode]);
     
     button.textContent = langShow[langCode] || 'Saiba mais';
-
-     document.getElementById('saiba-mais-btn').addEventListener('click', function() {
+    setLanguageSaibaMais(lang);
+       
+}
+function setLanguageSaibaMais(lang) {
+    // Set the language attribute on the HTML tag
+   // document.documentElement.lang = lang;
+    document.getElementById('saiba-mais-btn').addEventListener('click', function() {
         const content = document.getElementById('hidden-content');
         const langShow = JSON.parse(this.getAttribute('data-lang-show'));
         const langHide = JSON.parse(this.getAttribute('data-lang-hide'));
         
         // Get current language from html tag or default to 'pt'
-        const currentLang = document.documentElement.lang || 'pt';
+        const currentLang = lang;//document.documentElement.lang || 'pt';
         const langCode = currentLang.substring(0, 2); // Get first 2 chars (pt, en, es)
-
-        console.log('lang =====' + lang);
+       
+        console.log('document.documentElement.lang =' + document.documentElement.lang );
+        console.log('currentLang =====' + currentLang);
         console.log('content.style.display  =====' + content.style.display );
         console.log('langCode =====' + langCode);
-         console.log('langHide[lang]' + langHide[lang]);
-          console.log('langShow[lang]' + langShow[lang]);
+         console.log('langHide[currentLang]' + langHide[currentLang]);
+          console.log('langShow[currentLang]' + langShow[currentLang]);
 
         if (content.style.display === 'none' || content.style.display === '') {
             content.style.display = 'block';
-            this.textContent = langHide[lang] ;
+            this.textContent = langHide[currentLang] ;
         } else {
             content.style.display = 'none';
-            this.textContent = langShow[lang] ;
+            this.textContent = langShow[currentLang] ;
         }
     });
-    
 }
+ 
 
 // Set initial language on page load
 document.addEventListener('DOMContentLoaded', () => {
@@ -1390,41 +1395,7 @@ document.addEventListener('DOMContentLoaded', function() {
             submitButton.disabled = false;
             submitButton.innerHTML = originalButtonText;
         });
-        // Simular envio (substitua por sua lógica real de envio)
-        //setTimeout(function() {
-            // Aqui você faria a requisição AJAX para seu backend
-            // Exemplo com fetch:
-            /*
-            const formData = new FormData(form);
-            
-            fetch('seu-endpoint-api', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    showSuccessModal();
-                    form.reset();
-                } else {
-                    alert('Error: ' + (data.message || 'Failed to send message'));
-                }
-            })
-            .catch(error => {
-                alert('Error: ' + error.message);
-            })
-            .finally(() => {
-                submitButton.disabled = false;
-                submitButton.innerHTML = originalButtonText;
-            });
-            */
-            
-            // Para demonstração, estamos simulando um envio bem-sucedido
-          //  showSuccessModal();
-          //  form.reset();
-         //   submitButton.disabled = false;
-         //   submitButton.innerHTML = originalButtonText;
-        //}, 1500);
+        
     });
     
     function showSuccessModal() {
